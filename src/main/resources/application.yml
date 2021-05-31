@@ -1,0 +1,9 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: prod
+
+mybatis:
+  mapper-locations: classpath:com/**/mapper/*.xml
+  type-aliases-package: com.manage.pojo
