@@ -5,5 +5,14 @@ spring:
     active: prod
 
 mybatis:
-  mapper-locations: classpath:com/**/mapper/*.xml
+  mapper-locations:
+    - classpath:dao/*.xml
+    - classpath*:com/**/mapper/*.xml
   type-aliases-package: com.manage.pojo
+
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui.html
+      - /admin/login
+      - /admin/find

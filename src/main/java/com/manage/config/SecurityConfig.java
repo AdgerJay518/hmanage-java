@@ -3,6 +3,7 @@ package com.manage.config;
 import com.manage.component.AccessDeHandler;
 import com.manage.component.AuthEntryPoint;
 import com.manage.component.JwtAuthenticationTokenFilter;
+import com.manage.service.UmsAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -36,15 +38,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private UmsAdminService adminService;
+    @Autowired
     private AccessDeHandler accessDeHandler;
     @Autowired
     private AuthEntryPoint authEntryPoint;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors()
-                .and()
-                .csrf()
+//        cors()
+//                .and()
+        http.csrf()
                 .disable()
                 //禁用session
                 .sessionManagement()
@@ -63,6 +67,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v2/api-docs/**"
                 )
                 .permitAll()
+                .antMatchers("/admin/login")
+                .permitAll()
+                .antMatchers(HttpMethod.OPTIONS)//跨域请求会先进行一次options请求
+                .permitAll()
+                .antMatchers()
+                .permitAll()
                 .anyRequest()// 除上面外的所有请求全部需要鉴权认证
                 .authenticated();
 
@@ -72,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authEntryPoint);
         // 禁用缓存
         http.headers().cacheControl();
-        // 添加JWT filter
+        // 添加JWT登录授权过滤器
         http.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
@@ -81,6 +91,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService())
                 .passwordEncoder(passwordEncoder());
+    }
+
+    @Override
+    @Bean
+    public UserDetailsService userDetailsService() {
+        //获取登录用户信息
+        return username -> adminService.loadUserByUsername(username);
     }
 
     @Bean

@@ -13,4 +13,4 @@ jwt:
   tokenHeader: Authorization
   secret: d5a4sf6sf1as4d56w464e65q54asd45
   expiration: 604800
-  tokenHead: 'Bearer '  #JWT负载中拿到开头
+  tokenHead: 'Bearer '
