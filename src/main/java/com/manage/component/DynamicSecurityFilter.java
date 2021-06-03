@@ -1,5 +1,7 @@
 package com.manage.component;
 import com.manage.config.IgnoreConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.access.SecurityMetadataSource;
@@ -17,6 +19,8 @@ import java.io.IOException;
  * @author 吴政杰
  */
 public class DynamicSecurityFilter extends AbstractSecurityInterceptor implements Filter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicSecurityFilter.class);
+
 
     @Autowired
     private DynamicSecurityMetadataSource dynamicSecurityMetadataSource;
@@ -29,7 +33,7 @@ public class DynamicSecurityFilter extends AbstractSecurityInterceptor implement
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
@@ -51,6 +55,7 @@ public class DynamicSecurityFilter extends AbstractSecurityInterceptor implement
         }
         //调用AccessDecisionManager中的decide方法进行鉴权操作
         InterceptorStatusToken token = super.beforeInvocation(fi);
+        LOGGER.info("token:{}", token);
         try {
             fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
         } finally {

@@ -1,6 +1,8 @@
 package com.manage.component;
 
 import cn.hutool.core.util.URLUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.FilterInvocation;
@@ -15,6 +17,7 @@ import java.util.*;
  * @author 吴政杰
  */
 public class DynamicSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicSecurityMetadataSource.class);
 
     private static Map<String, ConfigAttribute> configAttributeMap = null;
     @Autowired
@@ -39,6 +42,8 @@ public class DynamicSecurityMetadataSource implements FilterInvocationSecurityMe
         //获取当前访问的路径
         String url = ((FilterInvocation) o).getRequestUrl();
         String path = URLUtil.getPath(url);
+        LOGGER.info("url:{}", url);
+        LOGGER.info("path:{}", path);
         PathMatcher pathMatcher = new AntPathMatcher();
         //获取访问该路径所需资源
         for (String pattern : configAttributeMap.keySet()) {
