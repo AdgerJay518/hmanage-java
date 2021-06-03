@@ -40,7 +40,6 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
-
         return umsAdminMapper.getAdminByUsername(username);
     }
 

@@ -3,6 +3,7 @@ package com.manage.controller;
 import com.manage.common.api.CommonResult;
 import com.manage.dto.UmsAdminLoginParam;
 import com.manage.pojo.UmsAdmin;
+import com.manage.pojo.UmsResource;
 import com.manage.service.UmsAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,10 +41,12 @@ public class UmsAdminController {
     @ResponseBody
     public CommonResult getAdminByUsername(){
         Map<String, Object> data = new HashMap<>();
-        UmsAdmin test = service.getAdminByUsername("test");
+        UmsAdmin test = service.getAdminByUsername("Adger");
+        List<UmsResource> resourceList = service.getResourceList(test.getId());
         data.put("username",test.getUsername());
         data.put("nickName",test.getNickName());
         data.put("createTime",test.getCreateTime());
+        data.put("List",resourceList);
         return CommonResult.success(data);
     }
 
@@ -51,7 +55,6 @@ public class UmsAdminController {
     @ResponseBody
     public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam) {
         String token = service.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
-
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }

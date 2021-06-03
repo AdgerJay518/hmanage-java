@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,14 +28,14 @@ public class AdminUserDetails implements UserDetails {
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<SimpleGrantedAuthority> list=new ArrayList<>();
-//        for (UmsResource resource:resourceList){
-//            list.add(new SimpleGrantedAuthority(resource.getId()+":"+resource.getName()));
-//        }
-//        return list;
-        return resourceList.stream()
-                .map(role ->new SimpleGrantedAuthority(role.getId()+":"+role.getName()))
-                .collect(Collectors.toList());
+        List<SimpleGrantedAuthority> list=new ArrayList<>();
+        for (UmsResource resource:resourceList){
+            list.add(new SimpleGrantedAuthority(resource.getId()+":"+resource.getName()));
+        }
+        return list;
+//        return resourceList.stream()
+//                .map(role ->new SimpleGrantedAuthority(role.getId()+":"+role.getName()))
+//                .collect(Collectors.toList());
     }
 
     /**
