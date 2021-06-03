@@ -13,6 +13,15 @@ mybatis:
 secure:
   ignored:
     urls: #安全路径白名单
+      - /swagger-ui/**
       - /swagger-ui.html
-      - /admin/login
-      - /admin/find
+      - /swagger-resources/**
+      - /swagger/**
+      - /**/v2/api-docs
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.ico
+      - /webjars/springfox-swagger-ui/**
+      - /actuator/**
+      - /druid/**
