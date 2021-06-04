@@ -1,11 +1,13 @@
 package com.manage.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.manage.common.exception.Asserts;
 import com.manage.dao.UmsAdminRoleRelationDao;
 import com.manage.bo.AdminUserDetails;
 import com.manage.mapper.UmsAdminMapper;
 import com.manage.pojo.UmsAdmin;
 import com.manage.pojo.UmsResource;
+import com.manage.service.UmsAdminCacheService;
 import com.manage.service.UmsAdminService;
 import com.manage.utils.JwtTokenUtil;
 import org.slf4j.Logger;
@@ -37,6 +39,8 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     private UmsAdminMapper umsAdminMapper;
     @Autowired
     private UmsAdminRoleRelationDao adminRoleRelationDao;
+    @Autowired
+    private UmsAdminCacheService adminCacheService;
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
@@ -45,7 +49,15 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public List<UmsResource> getResourceList(Long adminId) {
-        return adminRoleRelationDao.getResourceList(adminId);
+        List<UmsResource> resourceList = adminCacheService.getResourceList(adminId);
+        if (CollUtil.isNotEmpty(resourceList)){
+            return resourceList;
+        }
+        resourceList = adminRoleRelationDao.getResourceList(adminId);
+        if(CollUtil.isNotEmpty(resourceList)){
+            adminCacheService.setResourceList(adminId,resourceList);
+        }
+        return resourceList;
     }
 
     @Override
@@ -56,7 +68,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             if (!passwordEncoder.matches(password,userDetails.getPassword())){
                 Asserts.fail("密码不正确");
             }
-            if(userDetails.isEnabled()){
+            if(!userDetails.isEnabled()){
                 Asserts.fail("帐号已被禁用");
             }
             UsernamePasswordAuthenticationToken authenticationToken=

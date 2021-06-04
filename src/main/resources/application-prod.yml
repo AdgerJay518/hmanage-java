@@ -9,6 +9,13 @@ spring:
     user:
       name: user
       password: 123456
+  redis:
+    host: localhost
+    database: 0
+    port: 6379
+    password:
+    timeout: 300ms
+
 jwt:
   tokenHeader: Authorization
   secret: d5a4sf6sf1as4d56w464e65q54asd45

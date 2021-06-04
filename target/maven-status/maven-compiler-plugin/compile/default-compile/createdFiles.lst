@@ -1,8 +1,1 @@
-com\manage\HmanageJavaApplication.class
-com\manage\pojo\UmsAdmin.class
-com\manage\config\MyBatisConfig.class
-com\manage\config\SwaggerConfig.class
-com\manage\service\impl\UmsAdminServiceImpl.class
-com\manage\mapper\UmsAdminMapper.class
-com\manage\controller\UmsAdminController.class
-com\manage\service\UmsAdminService.class
+META-INF\spring-configuration-metadata.json
