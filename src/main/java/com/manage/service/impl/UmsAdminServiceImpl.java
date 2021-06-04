@@ -1,5 +1,6 @@
 package com.manage.service.impl;
 
+import com.manage.common.exception.Asserts;
 import com.manage.dao.UmsAdminRoleRelationDao;
 import com.manage.bo.AdminUserDetails;
 import com.manage.mapper.UmsAdminMapper;
@@ -10,7 +11,6 @@ import com.manage.utils.JwtTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -54,7 +54,10 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         try{
             UserDetails userDetails = loadUserByUsername(username);
             if (!passwordEncoder.matches(password,userDetails.getPassword())){
-                throw new BadCredentialsException("密码不正确");
+                Asserts.fail("密码不正确");
+            }
+            if(userDetails.isEnabled()){
+                Asserts.fail("帐号已被禁用");
             }
             UsernamePasswordAuthenticationToken authenticationToken=
                     new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
