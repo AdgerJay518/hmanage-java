@@ -1,0 +1,3 @@
+com\manage\model\UmsAdmin.class
+com\manage\model\UmsResource.class
+com\manage\mapper\UmsAdminMapper.class

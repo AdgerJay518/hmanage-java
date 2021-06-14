@@ -1,0 +1,12 @@
+com\manage\controller\UmsMenuController.class
+com\manage\controller\UmsAdminController.class
+com\manage\service\UmsAdminCacheService.class
+com\manage\config\CorsConfig.class
+com\manage\config\HmSecurityConfig.class
+com\manage\dao\UmsAdminRoleRelationDao.class
+com\manage\bo\AdminUserDetails.class
+com\manage\dto\UmsAdminLoginParam.class
+com\manage\service\impl\UmsAdminServiceImpl.class
+com\manage\service\UmsAdminService.class
+com\manage\AdminApplication.class
+com\manage\service\impl\UmsAdminCacheServiceImpl.class

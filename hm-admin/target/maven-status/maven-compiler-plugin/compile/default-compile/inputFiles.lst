@@ -1,0 +1,12 @@
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\impl\UmsAdminServiceImpl.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\config\HmSecurityConfig.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\controller\UmsAdminController.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\dao\UmsAdminRoleRelationDao.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\AdminApplication.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\dto\UmsAdminLoginParam.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\impl\UmsAdminCacheServiceImpl.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\UmsAdminCacheService.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\UmsAdminService.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\controller\UmsMenuController.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\config\CorsConfig.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\bo\AdminUserDetails.java
