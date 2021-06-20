@@ -1,6 +1,7 @@
 package com.manage.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import com.manage.bo.AdminUserDetails;
 import com.manage.common.exception.Asserts;
 import com.manage.dao.UmsAdminRoleRelationDao;
@@ -44,7 +45,17 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
-        return umsAdminMapper.getAdminByUsername(username);
+        UmsAdmin admin = adminCacheService.getAdmin(username);
+        if (admin!=null){
+            return admin;
+        }
+        List<UmsAdmin> adminByUsername = umsAdminMapper.getAdminByUsername(username);
+        if (adminByUsername!=null&&adminByUsername.size()>0){
+            UmsAdmin umsAdmin = adminByUsername.get(0);
+            adminCacheService.setAdmin(umsAdmin);
+            return umsAdmin;
+        }
+        return null;
     }
 
     @Override
@@ -89,5 +100,29 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             return new AdminUserDetails(adminByUsername,resourceList);
         }
         throw new UsernameNotFoundException("用户名或密码错误");
+    }
+
+    @Override
+    public int update(Long id, UmsAdmin admin) {
+        admin.setId(id);
+        UmsAdmin umsAdmin = umsAdminMapper.selectByPrimaryKey(id);
+        if (umsAdmin.getPassword().equals(admin.getPassword())){
+            admin.setPassword(null);
+        }
+        else{
+            if (StrUtil.isEmpty(admin.getPassword())){
+                admin.setPassword(null);
+            }else {
+                admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+            }
+        }
+        int update = umsAdminMapper.updateByPrimaryKeySelective(admin);
+        adminCacheService.delAdmin(id);
+        return update;
+    }
+
+    @Override
+    public UmsAdmin getById(Long id) {
+        return umsAdminMapper.selectByPrimaryKey(id);
     }
 }

@@ -35,4 +35,14 @@ public interface UmsAdminService {
      * @return
      */
     UserDetails loadUserByUsername(String username);
+
+    /**
+     * 修改指定用户信息
+     */
+    int update(Long id, UmsAdmin admin);
+
+    /**
+     * 根据用户id获取用户
+     */
+    UmsAdmin getById(Long id);
 }
