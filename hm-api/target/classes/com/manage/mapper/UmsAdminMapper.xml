@@ -85,4 +85,13 @@
         #{createTime,jdbcType=TIMESTAMP}, #{loginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
         )
     </insert>
+
+    <select id="getByLikeUsername" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ums_admin where username like #{username}
+    </select>
 </mapper>

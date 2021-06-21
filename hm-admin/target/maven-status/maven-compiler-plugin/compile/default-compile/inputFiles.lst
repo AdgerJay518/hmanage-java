@@ -4,6 +4,7 @@ D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\dao\UmsAdminRoleRelati
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\UmsAdminCacheService.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\controller\UmsMenuController.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\bo\AdminUserDetails.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\dto\UmsAdminParam.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\config\HmSecurityConfig.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\controller\UmsAdminController.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\UmsResourceService.java

@@ -2,6 +2,7 @@ package com.manage.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import com.github.pagehelper.PageHelper;
 import com.manage.bo.AdminUserDetails;
 import com.manage.common.exception.Asserts;
 import com.manage.dao.UmsAdminRoleRelationDao;
@@ -15,6 +16,7 @@ import com.manage.utils.JwtTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -151,5 +153,16 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         int count = umsAdminMapper.deleteByPrimaryKey(id);
         adminCacheService.delResourceList(id);
         return count;
+    }
+
+    @Override
+    public List<UmsAdmin> list(String keyword, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum,pageSize);
+        UmsAdmin admin = new UmsAdmin();
+        if (!StringUtils.isEmpty(keyword)){
+            admin.setUsername("%" + keyword + "%");
+            System.out.println(admin.getUsername());
+        }
+        return umsAdminMapper.getByLikeUsername(admin.getUsername());
     }
 }

@@ -1,5 +1,6 @@
 package com.manage.controller;
 
+import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
 import com.manage.dto.UmsAdminLoginParam;
 import com.manage.dto.UmsAdminParam;
@@ -64,6 +65,16 @@ public class UmsAdminController {
         data.put("createTime",test.getCreateTime());
         data.put("List",resourceList);
         return CommonResult.success(data);
+    }
+
+    @ApiOperation(value="根据用户名或姓名分页获取用户列表")
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<UmsAdmin>> list(@RequestParam(value = "keyword", required = false) String keyword,
+                                                   @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum){
+        List<UmsAdmin> list = service.list(keyword, pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(list));
     }
 
     @ApiOperation(value = "登录以后返回token")

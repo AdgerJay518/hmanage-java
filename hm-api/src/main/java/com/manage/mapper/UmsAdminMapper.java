@@ -18,6 +18,13 @@ public interface UmsAdminMapper {
     List<UmsAdmin> getAdminByUsername(String username);
 
     /**
+     * 模糊查询
+     * @param username
+     * @return
+     */
+    List<UmsAdmin> getByLikeUsername(String username);
+
+    /**
      * 根据id找到用户信息
      * @param id
      * @return
