@@ -23,12 +23,20 @@ public class UmsMenuController {
     @Autowired
     private UmsAdminService service;
 
-    @ApiOperation(value = "测试接口")
+    @ApiOperation(value = "测试接口1")
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     @ResponseBody
     @PreAuthorize("hasAuthority('2:后台角色管理')")
+    public CommonResult getAdminByUsername1(){
+        UmsAdmin test = service.getAdminByUsername("adger");
+        return CommonResult.success(test);
+    }
+
+    @ApiOperation(value = "测试接口2")
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    @ResponseBody
     public CommonResult getAdminByUsername(){
-        UmsAdmin test = service.getAdminByUsername("Adger");
+        UmsAdmin test = service.getAdminByUsername("test");
         return CommonResult.success(test);
     }
 }

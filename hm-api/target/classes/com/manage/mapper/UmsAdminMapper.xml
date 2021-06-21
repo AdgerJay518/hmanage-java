@@ -66,4 +66,9 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <delete id="deleteByPrimaryKey">
+        delete from ums_admin
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>
