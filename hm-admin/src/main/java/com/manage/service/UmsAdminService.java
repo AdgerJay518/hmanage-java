@@ -1,5 +1,6 @@
 package com.manage.service;
 
+import com.manage.dto.UmsAdminParam;
 import com.manage.model.UmsAdmin;
 import com.manage.model.UmsResource;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,12 @@ import java.util.List;
  * @author 吴政杰
  */
 public interface UmsAdminService {
+
+    /**
+     * 注册功能
+     */
+    UmsAdmin register(UmsAdminParam umsAdminParam);
+
     /**
      *根据用户名获得管理员
      */

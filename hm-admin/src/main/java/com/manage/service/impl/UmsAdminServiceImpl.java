@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.manage.bo.AdminUserDetails;
 import com.manage.common.exception.Asserts;
 import com.manage.dao.UmsAdminRoleRelationDao;
+import com.manage.dto.UmsAdminParam;
 import com.manage.mapper.UmsAdminMapper;
 import com.manage.model.UmsAdmin;
 import com.manage.model.UmsResource;
@@ -13,6 +14,7 @@ import com.manage.service.UmsAdminService;
 import com.manage.utils.JwtTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -22,6 +24,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,6 +45,22 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     private UmsAdminRoleRelationDao adminRoleRelationDao;
     @Autowired
     private UmsAdminCacheService adminCacheService;
+
+    @Override
+    public UmsAdmin register(UmsAdminParam umsAdminParam) {
+        UmsAdmin admin = new UmsAdmin();
+        BeanUtils.copyProperties(umsAdminParam,admin);
+        admin.setCreateTime(new Date());
+        admin.setStatus(1);
+        List<UmsAdmin> adminByUsername = umsAdminMapper.getAdminByUsername(admin.getUsername());
+        if (adminByUsername.size()>0){
+            return null;
+        }
+        String encode = passwordEncoder.encode(admin.getPassword());
+        admin.setPassword(encode);
+        umsAdminMapper.insert(admin);
+        return admin;
+    }
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {

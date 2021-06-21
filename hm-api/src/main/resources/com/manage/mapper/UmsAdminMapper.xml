@@ -71,4 +71,18 @@
         delete from ums_admin
         where id = #{id,jdbcType=BIGINT}
     </delete>
+
+    <insert id="insert" parameterType="com.manage.model.UmsAdmin">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into ums_admin (username, password, icon,
+        email, nick_name, note,
+        create_time, login_time, status
+        )
+        values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{loginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+        )
+    </insert>
 </mapper>

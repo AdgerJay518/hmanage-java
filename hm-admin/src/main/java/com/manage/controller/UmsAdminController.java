@@ -2,6 +2,7 @@ package com.manage.controller;
 
 import com.manage.common.api.CommonResult;
 import com.manage.dto.UmsAdminLoginParam;
+import com.manage.dto.UmsAdminParam;
 import com.manage.model.UmsAdmin;
 import com.manage.model.UmsResource;
 import com.manage.service.UmsAdminService;
@@ -32,6 +33,24 @@ public class UmsAdminController {
     @Autowired
     private UmsAdminService service;
 
+
+    @ApiOperation(value = "用户注册")
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult<UmsAdmin> register(@Validated @RequestBody UmsAdminParam umsAdminParam){
+        UmsAdmin register = service.register(umsAdminParam);
+        if (register==null){
+            return CommonResult.failed();
+        }
+        return CommonResult.success(register);
+    }
+
+    @ApiOperation(value = "登出功能")
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult logout() {
+        return CommonResult.success(null);
+    }
 
     @ApiOperation(value = "根据用户名查找用户")
     @RequestMapping(value = "/find", method = RequestMethod.GET)
@@ -64,7 +83,7 @@ public class UmsAdminController {
     @ApiOperation("获取指定用户信息")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult getItem(@PathVariable Long id){
+    public CommonResult getById(@PathVariable Long id){
         UmsAdmin byId = service.getById(id);
         return CommonResult.success(byId);
     }
@@ -90,4 +109,20 @@ public class UmsAdminController {
         }
         return CommonResult.failed();
     }
+
+    @ApiOperation("修改帐号状态")
+    @RequestMapping(value = "/updateStatus/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateStatus(@PathVariable Long id
+            ,@RequestParam(value = "status") Integer status ){
+        UmsAdmin admin = new UmsAdmin();
+        admin.setStatus(status);
+        int update = service.update(id, admin);
+        if (update>0){
+            return CommonResult.success(update);
+        }
+        return CommonResult.failed();
+    }
+
+
 }

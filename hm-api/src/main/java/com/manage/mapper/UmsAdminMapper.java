@@ -37,4 +37,11 @@ public interface UmsAdminMapper {
      * @return
      */
     int updateByPrimaryKeySelective(UmsAdmin admin);
+
+    /**
+     * 向数据库插入新用户信息
+     * @param record
+     * @return
+     */
+    int insert(UmsAdmin record);
 }
