@@ -61,6 +61,14 @@ public class UmsAdminController {
         return CommonResult.success(tokenMap);
     }
 
+    @ApiOperation("获取指定用户信息")
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult getItem(@PathVariable Long id){
+        UmsAdmin byId = service.getById(id);
+        return CommonResult.success(byId);
+    }
+
     @ApiOperation("修改指定用户信息")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
@@ -68,6 +76,17 @@ public class UmsAdminController {
         int count = service.update(id, admin);
         if (count > 0) {
             return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("删除指定用户信息")
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public  CommonResult delete(@PathVariable Long id){
+        int delete = service.delete(id);
+        if (delete>0){
+            return CommonResult.success(delete);
         }
         return CommonResult.failed();
     }

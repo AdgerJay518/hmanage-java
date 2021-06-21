@@ -125,4 +125,12 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     public UmsAdmin getById(Long id) {
         return umsAdminMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public int delete(Long id) {
+        adminCacheService.delAdmin(id);
+        int count = umsAdminMapper.deleteByPrimaryKey(id);
+        adminCacheService.delResourceList(id);
+        return count;
+    }
 }

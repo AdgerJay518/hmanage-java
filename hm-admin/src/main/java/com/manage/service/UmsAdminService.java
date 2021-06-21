@@ -45,4 +45,8 @@ public interface UmsAdminService {
      * 根据用户id获取用户
      */
     UmsAdmin getById(Long id);
+    /**
+     * 删除指定用户
+     */
+    int delete(Long id);
 }

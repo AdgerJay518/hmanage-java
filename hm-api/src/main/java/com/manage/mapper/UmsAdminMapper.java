@@ -25,6 +25,13 @@ public interface UmsAdminMapper {
     UmsAdmin selectByPrimaryKey(Long id);
 
     /**
+     * 根据id删除用户
+     * @param id
+     * @return
+     */
+    int deleteByPrimaryKey(Long id);
+
+    /**
      * 更新用户信息
      * @param admin
      * @return
