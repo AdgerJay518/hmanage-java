@@ -163,5 +163,11 @@ public class UmsAdminController {
         return CommonResult.failed();
     }
 
-
+   @ApiOperation("获取指定用户的角色")
+    @RequestMapping(value = "/role/{adminId}",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<UmsRole>> getRoleList(@PathVariable Long adminId){
+       List<UmsRole> roleList = service.getRoleList(adminId);
+       return CommonResult.success(roleList);
+   }
 }

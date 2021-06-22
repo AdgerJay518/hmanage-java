@@ -2,13 +2,16 @@ D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\impl\UmsAdminS
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\impl\UmsResourceServiceImpl.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\dao\UmsAdminRoleRelationDao.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\UmsAdminCacheService.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\UmsRoleService.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\controller\UmsMenuController.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\bo\AdminUserDetails.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\impl\UmsRoleServiceImpl.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\dto\UmsAdminParam.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\config\HmSecurityConfig.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\controller\UmsAdminController.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\UmsResourceService.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\AdminApplication.java
+D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\dao\UmsRoleDao.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\dto\UmsAdminLoginParam.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\impl\UmsAdminCacheServiceImpl.java
 D:\IdeaProjects\hm-java\hm-admin\src\main\java\com\manage\service\UmsAdminService.java
