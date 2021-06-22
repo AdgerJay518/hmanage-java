@@ -1,6 +1,7 @@
 package com.manage.dao;
 
 import com.manage.model.UmsResource;
+import com.manage.model.UmsRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,4 +17,8 @@ public interface UmsAdminRoleRelationDao {
      * 获取用户所有可访问资源
      */
     List<UmsResource> getResourceList(@Param("adminId") Long adminId);
+    /**
+     * 获取所有角色
+     */
+    List<UmsRole> getRoleList(@Param("adminId") Long adminId);
 }

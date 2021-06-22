@@ -3,6 +3,7 @@ package com.manage.service;
 import com.manage.dto.UmsAdminParam;
 import com.manage.model.UmsAdmin;
 import com.manage.model.UmsResource;
+import com.manage.model.UmsRole;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
@@ -62,4 +63,9 @@ public interface UmsAdminService {
      * 根据用户名分页查询用户
      */
     List<UmsAdmin> list(String keyword, Integer pageSize, Integer pageNum);
+
+    /**
+     * 获取用户对应角色
+     */
+    List<UmsRole> getRoleList(Long adminId);
 }

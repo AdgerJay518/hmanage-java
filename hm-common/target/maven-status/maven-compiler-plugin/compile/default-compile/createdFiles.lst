@@ -1,5 +1,6 @@
 com\manage\common\api\ErrorCode.class
 com\manage\common\api\ResultCode.class
+com\manage\common\api\CommonPage.class
 com\manage\common\exception\Exception.class
 com\manage\common\service\RedisService.class
 com\manage\common\config\SwaggerConfig.class

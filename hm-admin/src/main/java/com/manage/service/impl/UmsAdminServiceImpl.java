@@ -10,6 +10,7 @@ import com.manage.dto.UmsAdminParam;
 import com.manage.mapper.UmsAdminMapper;
 import com.manage.model.UmsAdmin;
 import com.manage.model.UmsResource;
+import com.manage.model.UmsRole;
 import com.manage.service.UmsAdminCacheService;
 import com.manage.service.UmsAdminService;
 import com.manage.utils.JwtTokenUtil;
@@ -164,5 +165,10 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             System.out.println(admin.getUsername());
         }
         return umsAdminMapper.getByLikeUsername(admin.getUsername());
+    }
+
+    @Override
+    public List<UmsRole> getRoleList(Long adminId) {
+        return adminRoleRelationDao.getRoleList(adminId);
     }
 }

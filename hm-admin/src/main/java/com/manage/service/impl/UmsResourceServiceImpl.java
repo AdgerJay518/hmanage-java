@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by jonyon on 2021/6/21.
+ *资源管理Service实现类
+ * @author jonyon
+ * @date 2021/6/21
  */
 @Service
 public class UmsResourceServiceImpl implements UmsResourceService {

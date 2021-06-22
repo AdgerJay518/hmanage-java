@@ -1,12 +1,15 @@
 package com.manage.controller;
 
+import cn.hutool.core.collection.CollUtil;
 import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
 import com.manage.dto.UmsAdminLoginParam;
 import com.manage.dto.UmsAdminParam;
 import com.manage.model.UmsAdmin;
 import com.manage.model.UmsResource;
+import com.manage.model.UmsRole;
 import com.manage.service.UmsAdminService;
+import com.manage.service.UmsRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +18,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 用户管理Controller
@@ -33,6 +38,8 @@ public class UmsAdminController {
     private String tokenHead;
     @Autowired
     private UmsAdminService service;
+    @Autowired
+    private UmsRoleService roleService;
 
 
     @ApiOperation(value = "用户注册")
@@ -65,6 +72,27 @@ public class UmsAdminController {
         data.put("createTime",test.getCreateTime());
         data.put("List",resourceList);
         return CommonResult.success(data);
+    }
+
+    @ApiOperation(value = "获取当前登录用户信息")
+    @RequestMapping(value = "/info",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult getAdminInfo(Principal principal){
+        if (principal==null){
+            return CommonResult.unauthorized(null);
+        }
+        String name = principal.getName();
+        UmsAdmin adminByUsername = service.getAdminByUsername(name);
+        Map<String,Object> map=new HashMap<>();
+        map.put("username",adminByUsername.getUsername());
+        map.put("icon",adminByUsername.getIcon());
+        map.put("menus",roleService.getMenuList(adminByUsername.getId()));
+        List<UmsRole> roleList = service.getRoleList(adminByUsername.getId());
+        if (CollUtil.isNotEmpty(roleList)){
+            List<String> roles = roleList.stream().map(UmsRole::getName).collect(Collectors.toList());
+            map.put("roles",roles);
+        }
+        return CommonResult.success(map);
     }
 
     @ApiOperation(value="根据用户名或姓名分页获取用户列表")
