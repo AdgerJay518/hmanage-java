@@ -162,7 +162,6 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         UmsAdmin admin = new UmsAdmin();
         if (!StringUtils.isEmpty(keyword)){
             admin.setUsername("%" + keyword + "%");
-            System.out.println(admin.getUsername());
         }
         return umsAdminMapper.getByLikeUsername(admin.getUsername());
     }

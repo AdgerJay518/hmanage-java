@@ -92,6 +92,9 @@
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from ums_admin where username like #{username}
+        from ums_admin
+        <if test="_parameter != null">
+            where username like #{username}
+        </if>
     </select>
 </mapper>
