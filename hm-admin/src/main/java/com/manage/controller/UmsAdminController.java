@@ -170,4 +170,12 @@ public class UmsAdminController {
        List<UmsRole> roleList = service.getRoleList(adminId);
        return CommonResult.success(roleList);
    }
+
+   @ApiOperation("分配角色")
+   @RequestMapping(value = "/role/update",method = RequestMethod.POST)
+   @ResponseBody
+   public CommonResult updateRole(@RequestParam("adminId") Long adminId,
+                                  @RequestParam("roleId") List<Long> roleId){
+       return CommonResult.failed();
+   }
 }

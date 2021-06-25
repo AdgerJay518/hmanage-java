@@ -171,4 +171,11 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     public List<UmsRole> getRoleList(Long adminId) {
         return adminRoleRelationDao.getRoleList(adminId);
     }
+
+    @Override
+    public int updateRole(Long adminId, List<Long> roleId) {
+        int count=roleId==null?0:roleId.size();
+
+        return count;
+    }
 }

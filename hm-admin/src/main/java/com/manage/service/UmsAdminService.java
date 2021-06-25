@@ -5,6 +5,7 @@ import com.manage.model.UmsAdmin;
 import com.manage.model.UmsResource;
 import com.manage.model.UmsRole;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -68,4 +69,10 @@ public interface UmsAdminService {
      * 获取用户对应角色
      */
     List<UmsRole> getRoleList(Long adminId);
+
+    /**
+     * 修改用户角色
+     */
+    @Transactional
+    int updateRole(Long adminId, List<Long> roleId);
 }
