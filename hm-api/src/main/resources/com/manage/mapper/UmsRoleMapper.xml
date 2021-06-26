@@ -13,7 +13,7 @@
     <sql id="Base_Column_List">
         id, name, description, admin_count, create_time, status, sort
     </sql>
-    <select id="selectByRole" resultType="com.manage.model.UmsRole">
+    <select id="selectByRole" resultMap="BaseResultMap">
     select
         <include refid="Base_Column_List" />
         from ums_role

@@ -1,6 +1,7 @@
 D:\IdeaProjects\hm-java\hm-common\src\main\java\com\manage\common\config\RedisConfig.java
 D:\IdeaProjects\hm-java\hm-common\src\main\java\com\manage\common\exception\Asserts.java
 D:\IdeaProjects\hm-java\hm-common\src\main\java\com\manage\common\service\RedisService.java
+D:\IdeaProjects\hm-java\hm-common\src\main\java\com\manage\common\api\CommonPage.java
 D:\IdeaProjects\hm-java\hm-common\src\main\java\com\manage\common\exception\Exception.java
 D:\IdeaProjects\hm-java\hm-common\src\main\java\com\manage\common\api\ResultCode.java
 D:\IdeaProjects\hm-java\hm-common\src\main\java\com\manage\common\config\SwaggerConfig.java

@@ -1,5 +1,6 @@
 com\manage\model\UmsRole.class
 com\manage\model\UmsAdmin.class
+com\manage\mapper\UmsRoleMapper.class
 com\manage\model\UmsResource.class
 com\manage\mapper\UmsAdminMapper.class
 com\manage\model\UmsMenu.class

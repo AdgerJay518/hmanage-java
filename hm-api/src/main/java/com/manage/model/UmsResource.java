@@ -11,6 +11,7 @@ import java.util.Date;
  */
 @Data
 public class UmsResource implements Serializable {
+    private static final long serialVersionUID=1L;
     private Long id;
 
     @ApiModelProperty(value = "资源分类ID")
