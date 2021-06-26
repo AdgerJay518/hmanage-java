@@ -51,4 +51,11 @@ public interface UmsAdminMapper {
      * @return
      */
     int insert(UmsAdmin record);
+
+    /**
+     * 通过id删除对应角色
+     * @param id
+     * @return
+     */
+    int deleteRoleById(Long id);
 }

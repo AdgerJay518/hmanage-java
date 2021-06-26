@@ -1,6 +1,7 @@
 package com.manage.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.manage.bo.AdminUserDetails;
@@ -9,6 +10,7 @@ import com.manage.dao.UmsAdminRoleRelationDao;
 import com.manage.dto.UmsAdminParam;
 import com.manage.mapper.UmsAdminMapper;
 import com.manage.model.UmsAdmin;
+import com.manage.model.UmsAdminRoleRelation;
 import com.manage.model.UmsResource;
 import com.manage.model.UmsRole;
 import com.manage.service.UmsAdminCacheService;
@@ -27,6 +29,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -174,7 +177,20 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Override
     public int updateRole(Long adminId, List<Long> roleId) {
         int count=roleId==null?0:roleId.size();
-
+        //删除原来的关系
+        umsAdminMapper.deleteRoleById(adminId);
+        //建立新关系
+        if (!CollectionUtil.isEmpty(roleId)){
+            List<UmsAdminRoleRelation> list=new ArrayList<>();
+            for (Long id : roleId) {
+                UmsAdminRoleRelation umsAdminRoleRelation = new UmsAdminRoleRelation();
+                umsAdminRoleRelation.setAdminId(adminId);
+                umsAdminRoleRelation.setRoleId(id);
+                list.add(umsAdminRoleRelation);
+            }
+            adminRoleRelationDao.insertList(list);
+        }
+        adminCacheService.delResourceList(adminId);
         return count;
     }
 }

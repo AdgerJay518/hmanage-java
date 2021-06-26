@@ -175,7 +175,11 @@ public class UmsAdminController {
    @RequestMapping(value = "/role/update",method = RequestMethod.POST)
    @ResponseBody
    public CommonResult updateRole(@RequestParam("adminId") Long adminId,
-                                  @RequestParam("roleId") List<Long> roleId){
+                                  @RequestParam("roleIds") List<Long> roleIds){
+        int i = service.updateRole(adminId, roleIds);
+       if (i>0){
+           return CommonResult.success(i);
+       }
        return CommonResult.failed();
    }
 }

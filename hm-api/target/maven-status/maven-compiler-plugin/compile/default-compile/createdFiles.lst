@@ -1,4 +1,5 @@
 com\manage\model\UmsRole.class
+com\manage\model\UmsAdminRoleRelation.class
 com\manage\model\UmsAdmin.class
 com\manage\mapper\UmsRoleMapper.class
 com\manage\model\UmsResource.class
