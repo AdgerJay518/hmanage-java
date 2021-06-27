@@ -1,7 +1,10 @@
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\UmsAdminRoleRelation.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsRoleMapper.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsAdminMapper.java
+D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsMenuMapper.java
+D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsResourceCategoryMapper.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsResourceMapper.java
+D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\UmsResourceCategory.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\UmsRole.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\UmsResource.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\UmsMenu.java

@@ -9,8 +9,25 @@
         <result column="description" jdbcType="VARCHAR" property="description" />
         <result column="category_id" jdbcType="BIGINT" property="categoryId" />
     </resultMap>
+    <sql id="Base_Column_List">
+        id, create_time, name, url, description, category_id
+    </sql>
     <select id="selectByResource" resultMap="BaseResultMap">
-        select id, create_time, name, url, description, category_id
+        select
+        <include refid="Base_Column_List" />
         from ums_resource
+        <if test="_parameter != null">
+            <where>
+                <if test="categoryId!=null">
+                    and category_id=#{categoryId,jdbcType=BIGINT}
+                </if>
+                <if test="name!=null">
+                    and name like #{name,jdbcType=VARCHAR}
+                </if>
+                <if test="url!=null">
+                    and url like #{url,jdbcType=VARCHAR}
+                </if>
+            </where>
+        </if>
     </select>
 </mapper>
