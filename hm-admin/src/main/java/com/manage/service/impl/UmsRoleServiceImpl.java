@@ -1,5 +1,6 @@
 package com.manage.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.manage.dao.UmsRoleDao;
 import com.manage.mapper.UmsRoleMapper;
 import com.manage.model.UmsMenu;
@@ -7,7 +8,9 @@ import com.manage.model.UmsRole;
 import com.manage.service.UmsRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -30,5 +33,15 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     @Override
     public List<UmsRole> list() {
         return umsRoleMapper.selectByRole(new UmsRole());
+    }
+
+    @Override
+    public List<UmsRole> list(String keyword, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum,pageSize);
+        UmsRole umsRole = new UmsRole();
+        if (!StringUtils.isEmpty(keyword)){
+            umsRole.setName("%"+keyword+"%");
+        }
+        return umsRoleMapper.getByLikeName(umsRole.getName());
     }
 }

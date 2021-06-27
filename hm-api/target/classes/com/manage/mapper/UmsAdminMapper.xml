@@ -97,4 +97,9 @@
             where username like #{username}
         </if>
     </select>
+
+    <delete id="deleteRoleById">
+        delete from ums_admin_role_relation
+        where admin_id=#{id}
+    </delete>
 </mapper>

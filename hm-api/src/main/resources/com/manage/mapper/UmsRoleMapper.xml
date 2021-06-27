@@ -18,4 +18,16 @@
         <include refid="Base_Column_List" />
         from ums_role
     </select>
+
+    <select id="getByLikeName" resultMap="BaseResultMap">
+        select
+            <if test="distinct">
+                distinct
+            </if>
+        <include refid="Base_Column_List" />
+        from ums_role
+        <if test="_parameter!=null">
+            where name like #{name}
+        </if>
+    </select>
 </mapper>

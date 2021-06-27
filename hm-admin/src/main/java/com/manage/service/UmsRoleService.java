@@ -19,4 +19,6 @@ public interface UmsRoleService {
      * 获取所有角色列表
      */
     List<UmsRole> list();
+
+    List<UmsRole> list(String keyword,Integer pageSize,Integer pageNum);
 }

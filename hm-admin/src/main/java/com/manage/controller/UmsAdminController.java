@@ -95,7 +95,7 @@ public class UmsAdminController {
         return CommonResult.success(map);
     }
 
-    @ApiOperation(value="根据用户名或姓名分页获取用户列表")
+    @ApiOperation(value="根据用户名分页获取用户列表")
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<CommonPage<UmsAdmin>> list(@RequestParam(value = "keyword", required = false) String keyword,
