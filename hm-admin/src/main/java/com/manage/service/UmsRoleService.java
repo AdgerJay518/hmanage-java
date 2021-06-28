@@ -20,5 +20,34 @@ public interface UmsRoleService {
      */
     List<UmsRole> list();
 
+    /**
+     * 分页获取角色列表
+     * @param keyword
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
     List<UmsRole> list(String keyword,Integer pageSize,Integer pageNum);
+
+    /**
+     * 更新角色信息
+     * @param id
+     * @param umsRole
+     * @return
+     */
+    int update(long id,UmsRole umsRole);
+
+    /**
+     * 创建角色
+     * @param umsRole
+     * @return
+     */
+    int create(UmsRole umsRole);
+
+    /**
+     * 删除角色
+     * @param ids
+     * @return
+     */
+    int delete(Long id);
 }

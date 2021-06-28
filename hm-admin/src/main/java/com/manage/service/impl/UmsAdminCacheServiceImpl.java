@@ -1,6 +1,9 @@
 package com.manage.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
+import com.manage.mapper.UmsAdminRoleRelationMapper;
 import com.manage.model.UmsAdmin;
+import com.manage.model.UmsAdminRoleRelation;
 import com.manage.model.UmsResource;
 import com.manage.common.service.RedisService;
 import com.manage.service.UmsAdminCacheService;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 用户缓存操作Service实现类
@@ -21,6 +25,8 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     private UmsAdminService adminService;
     @Autowired
     private RedisService redisService;
+    @Autowired
+    private UmsAdminRoleRelationMapper adminRoleRelationMapper;
     @Value("${redis.database}")
     private String REDIS_DATABASE;
     @Value("${redis.expire.common}")
@@ -65,6 +71,16 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
         if (admin!=null){
             String key=REDIS_DATABASE+":"+REDIS_KEY_ADMIN+":"+admin.getUsername();
             redisService.del(key);
+        }
+    }
+
+    @Override
+    public void delResourceListByRoleIds(Long id) {
+        List<UmsAdminRoleRelation> umsAdminRoleRelations = adminRoleRelationMapper.selectByRelation(id);
+        if (CollUtil.isNotEmpty(umsAdminRoleRelations)) {
+            String keyPrefix = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":";
+            List<String> keys = umsAdminRoleRelations.stream().map(relation -> keyPrefix + relation.getAdminId()).collect(Collectors.toList());
+            redisService.del(keys);
         }
     }
 }

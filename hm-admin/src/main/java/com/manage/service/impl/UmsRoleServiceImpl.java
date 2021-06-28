@@ -5,12 +5,13 @@ import com.manage.dao.UmsRoleDao;
 import com.manage.mapper.UmsRoleMapper;
 import com.manage.model.UmsMenu;
 import com.manage.model.UmsRole;
+import com.manage.service.UmsAdminCacheService;
 import com.manage.service.UmsRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +25,8 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     private UmsRoleDao roleDao;
     @Autowired
     private UmsRoleMapper umsRoleMapper;
+    @Autowired
+    private UmsAdminCacheService adminCacheService;
 
     @Override
     public List<UmsMenu> getMenuList(Long adminId) {
@@ -43,5 +46,26 @@ public class UmsRoleServiceImpl implements UmsRoleService {
             umsRole.setName("%"+keyword+"%");
         }
         return umsRoleMapper.getByLikeName(umsRole.getName());
+    }
+
+    @Override
+    public int update(long id, UmsRole umsRole) {
+        umsRole.setId(id);
+        return umsRoleMapper.updateByUmsRole(umsRole);
+    }
+
+    @Override
+    public int create(UmsRole umsRole) {
+        umsRole.setCreateTime(new Date());
+        umsRole.setAdminCount(0);
+        umsRole.setSort(0);
+        return umsRoleMapper.create(umsRole);
+    }
+
+    @Override
+    public int delete(Long id) {
+        int count = umsRoleMapper.deleteByPrimaryKey(id);
+        adminCacheService.delResourceListByRoleIds(id);
+        return count;
     }
 }

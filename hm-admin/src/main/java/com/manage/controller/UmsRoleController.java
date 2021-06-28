@@ -8,10 +8,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,5 +41,51 @@ public class UmsRoleController {
                                             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum){
         List<UmsRole> list = umsRoleService.list(keyword, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(list));
+    }
+
+    @ApiOperation("修改角色状态")
+    @RequestMapping(value = "/updateStatus/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateStatus(@PathVariable Long id, @RequestParam(value = "status") Integer status){
+        UmsRole umsRole = new UmsRole();
+        umsRole.setStatus(status);
+        int update = umsRoleService.update(id, umsRole);
+        if (update>0){
+            return CommonResult.success(update);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("修改角色")
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult update(@PathVariable Long id,@RequestBody UmsRole umsRole){
+        int update = umsRoleService.update(id, umsRole);
+        if (update>0){
+            return CommonResult.success(update);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("创建角色")
+    @RequestMapping(value = "/create",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult create(@RequestBody UmsRole umsRole){
+        int update = umsRoleService.create(umsRole);
+        if (update>0){
+            return CommonResult.success(update);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("删除角色信息")
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult delete(@PathVariable Long id){
+        int delete = umsRoleService.delete(id);
+        if (delete>0){
+            return CommonResult.success(delete);
+        }
+        return CommonResult.failed();
     }
 }

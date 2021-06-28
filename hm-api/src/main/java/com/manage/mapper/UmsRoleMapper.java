@@ -15,4 +15,25 @@ public interface UmsRoleMapper {
      * @return
      */
     List<UmsRole> getByLikeName(String name);
+
+    /**
+     * 通过id更新用户信息
+     * @param umsRole
+     * @return
+     */
+    int updateByUmsRole(UmsRole umsRole);
+
+    /**
+     * 创建角色
+     * @param umsRole
+     * @return
+     */
+    int create(UmsRole umsRole);
+
+    /**
+     * 根据id删除用户
+     * @param id
+     * @return
+     */
+    int deleteByPrimaryKey(Long id);
 }
