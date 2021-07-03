@@ -4,9 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.manage.dao.UmsRoleDao;
 import com.manage.mapper.UmsRoleMapper;
 import com.manage.mapper.UmsRoleMenuRelationMapper;
-import com.manage.model.UmsMenu;
-import com.manage.model.UmsRole;
-import com.manage.model.UmsRoleMenuRelation;
+import com.manage.mapper.UmsRoleResourceRelationMapper;
+import com.manage.model.*;
 import com.manage.service.UmsAdminCacheService;
 import com.manage.service.UmsRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,8 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     private UmsRoleMapper umsRoleMapper;
     @Autowired
     private UmsRoleMenuRelationMapper roleMenuRelationMapper;
+    @Autowired
+    private UmsRoleResourceRelationMapper roleResourceRelationMapper;
     @Autowired
     private UmsAdminCacheService adminCacheService;
 
@@ -90,5 +91,25 @@ public class UmsRoleServiceImpl implements UmsRoleService {
             roleMenuRelationMapper.insert(umsRoleMenuRelation);
         }
         return menuIds.size();
+    }
+
+    @Override
+    public List<UmsResource> listResource(Long roleId) {
+        return roleDao.getResourceListByRoleId(roleId);
+    }
+
+    @Override
+    public int allocResource(Long roleId, List<Long> resourceIds) {
+        //删除原有关系
+        roleResourceRelationMapper.deleteRRRelationById(roleId);
+        //建立新关系
+        for (Long resourceId : resourceIds) {
+            UmsRoleResourceRelation umsRoleResourceRelation = new UmsRoleResourceRelation();
+            umsRoleResourceRelation.setRoleId(roleId);
+            umsRoleResourceRelation.setResourceId(resourceId);
+            roleResourceRelationMapper.insert(umsRoleResourceRelation);
+        }
+        adminCacheService.delResourceListByRoleIds(roleId);
+        return resourceIds.size();
     }
 }

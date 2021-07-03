@@ -1,6 +1,7 @@
 package com.manage.service;
 
 import com.manage.model.UmsMenu;
+import com.manage.model.UmsResource;
 import com.manage.model.UmsRole;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,4 +65,15 @@ public interface UmsRoleService {
      */
     @Transactional
     int allocMenu(Long roleId, List<Long> menuIds);
+
+    /**
+     * 获取角色相关资源
+     */
+    List<UmsResource> listResource(Long roleId);
+
+    /**
+     * 给角色分配资源
+     */
+    @Transactional
+    int allocResource(Long roleId, List<Long> resourceIds);
 }

@@ -1,6 +1,8 @@
 com\manage\mapper\UmsRoleMenuRelationMapper.class
 com\manage\model\UmsRole.class
+com\manage\model\UmsRoleResourceRelation.class
 com\manage\mapper\UmsMenuMapper.class
+com\manage\mapper\UmsRoleResourceRelationMapper.class
 com\manage\model\UmsAdmin.class
 com\manage\model\UmsRoleMenuRelation.class
 com\manage\mapper\UmsResourceCategoryMapper.class

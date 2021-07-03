@@ -45,4 +45,22 @@
         GROUP BY
                 m.id
     </select>
+
+    <select id="getResourceListByRoleId" resultType="com.manage.model.UmsResource">
+        SELECT
+                r.id id,
+                r.create_time createTime,
+                r.`name` `name`,
+                r.url url,
+                r.description description,
+                r.category_id categoryId
+        FROM
+                ums_role_resource_relation rrr
+                        LEFT JOIN ums_resource r ON rrr.resource_id = r.id
+        WHERE
+                rrr.role_id = #{roleId}
+          AND r.id IS NOT NULL
+        GROUP BY
+                r.id
+    </select>
 </mapper>

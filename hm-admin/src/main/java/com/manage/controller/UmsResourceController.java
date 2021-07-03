@@ -37,4 +37,12 @@ public class UmsResourceController {
         List<UmsResource> list = umsResourceService.list(categoryId, nameKeyword, urlKeyword, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(list));
     }
+
+    @ApiOperation("查询所有后台资源")
+    @RequestMapping(value = "/listAll",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<UmsResource>> listAll(){
+        List<UmsResource> umsResources = umsResourceService.listAll();
+        return CommonResult.success(umsResources);
+    }
 }

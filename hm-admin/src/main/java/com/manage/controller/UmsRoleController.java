@@ -3,6 +3,7 @@ package com.manage.controller;
 import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
 import com.manage.model.UmsMenu;
+import com.manage.model.UmsResource;
 import com.manage.model.UmsRole;
 import com.manage.service.UmsRoleService;
 import io.swagger.annotations.Api;
@@ -103,6 +104,23 @@ public class UmsRoleController {
     @ResponseBody
     public CommonResult allocMenu(@RequestParam Long roleId, @RequestParam List<Long> menuIds) {
         int count = umsRoleService.allocMenu(roleId, menuIds);
+        return CommonResult.success(count);
+    }
+
+    @ApiOperation("获取角色相关资源")
+    @RequestMapping(value = "/listResource/{roleId}",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<UmsResource>> listResource(@PathVariable Long roleId){
+        List<UmsResource> umsResources = umsRoleService.listResource(roleId);
+        return CommonResult.success(umsResources);
+    }
+
+
+    @ApiOperation("给角色分配资源")
+    @RequestMapping(value = "/allocResource", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult allocResource(@RequestParam Long roleId, @RequestParam List<Long> resourceIds) {
+        int count = umsRoleService.allocResource(roleId, resourceIds);
         return CommonResult.success(count);
     }
 }
