@@ -2,6 +2,7 @@ package com.manage.controller;
 
 import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
+import com.manage.dto.UmsMenuNode;
 import com.manage.model.UmsMenu;
 import com.manage.service.UmsMenuService;
 import io.swagger.annotations.Api;
@@ -34,4 +35,11 @@ public class UmsMenuController {
         return CommonResult.success(CommonPage.restPage(list));
     }
 
+    @ApiOperation("返回树形结构菜单列表")
+    @RequestMapping(value = "/treeList", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<UmsMenuNode>> treeList() {
+        List<UmsMenuNode> list = umsMenuService.treeList();
+        return CommonResult.success(list);
+    }
 }

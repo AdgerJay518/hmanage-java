@@ -2,6 +2,7 @@ package com.manage.controller;
 
 import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
+import com.manage.model.UmsMenu;
 import com.manage.model.UmsRole;
 import com.manage.service.UmsRoleService;
 import io.swagger.annotations.Api;
@@ -87,5 +88,21 @@ public class UmsRoleController {
             return CommonResult.success(delete);
         }
         return CommonResult.failed();
+    }
+
+    @ApiOperation("获取角色相关菜单")
+    @RequestMapping(value = "/listMenu/{roleId}",method =RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<UmsMenu>> listMenu(@PathVariable Long roleId){
+        List<UmsMenu> umsMenus = umsRoleService.listMenu(roleId);
+        return CommonResult.success(umsMenus);
+    }
+
+    @ApiOperation("给角色分配菜单")
+    @RequestMapping(value = "/allocMenu", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult allocMenu(@RequestParam Long roleId, @RequestParam List<Long> menuIds) {
+        int count = umsRoleService.allocMenu(roleId, menuIds);
+        return CommonResult.success(count);
     }
 }

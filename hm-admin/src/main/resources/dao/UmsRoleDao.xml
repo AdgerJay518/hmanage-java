@@ -24,4 +24,25 @@
         GROUP BY
                 m.id
     </select>
+
+    <select id="getMenuListByRoleId" resultType="com.manage.model.UmsMenu">
+        SELECT
+                m.id id,
+                m.parent_id parentId,
+                m.create_time createTime,
+                m.title title,
+                m.level level,
+                m.sort sort,
+                m.name name,
+                m.icon icon,
+                m.hidden hidden
+        FROM
+                ums_role_menu_relation rmr
+                        LEFT JOIN ums_menu m ON rmr.menu_id = m.id
+        WHERE
+                rmr.role_id = #{roleId}
+          AND m.id IS NOT NULL
+        GROUP BY
+                m.id
+    </select>
 </mapper>

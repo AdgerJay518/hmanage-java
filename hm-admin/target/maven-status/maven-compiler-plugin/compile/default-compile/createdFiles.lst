@@ -1,3 +1,4 @@
+com\manage\dto\UmsMenuNode.class
 com\manage\controller\UmsMenuController.class
 com\manage\service\impl\UmsResourceCategoryServiceImpl.class
 com\manage\service\UmsMenuService.class

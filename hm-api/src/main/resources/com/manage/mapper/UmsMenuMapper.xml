@@ -24,4 +24,10 @@
         from ums_menu
         where parent_id=#{parentId,jdbcType=BIGINT}
     </select>
+
+    <select id="selectByUmsMenu" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ums_menu
+    </select>
 </mapper>

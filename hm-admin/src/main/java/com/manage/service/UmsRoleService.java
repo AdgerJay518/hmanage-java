@@ -2,6 +2,7 @@ package com.manage.service;
 
 import com.manage.model.UmsMenu;
 import com.manage.model.UmsRole;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -50,4 +51,17 @@ public interface UmsRoleService {
      * @return
      */
     int delete(Long id);
+
+    /**
+     * 获取角色相关菜单
+     * @param id
+     * @return
+     */
+    List<UmsMenu> listMenu(Long id);
+
+    /**
+     * 给角色分配菜单
+     */
+    @Transactional
+    int allocMenu(Long roleId, List<Long> menuIds);
 }

@@ -16,4 +16,9 @@ public interface UmsRoleDao {
      * 根据ID获取对应菜单
      */
     List<UmsMenu> getMenuList(@Param("adminId") Long adminId);
+
+    /**
+     * 根据角色ID获取菜单
+     */
+    List<UmsMenu> getMenuListByRoleId(@Param("roleId") Long roleId);
 }

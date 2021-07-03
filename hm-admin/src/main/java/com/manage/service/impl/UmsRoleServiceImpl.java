@@ -3,8 +3,10 @@ package com.manage.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.manage.dao.UmsRoleDao;
 import com.manage.mapper.UmsRoleMapper;
+import com.manage.mapper.UmsRoleMenuRelationMapper;
 import com.manage.model.UmsMenu;
 import com.manage.model.UmsRole;
+import com.manage.model.UmsRoleMenuRelation;
 import com.manage.service.UmsAdminCacheService;
 import com.manage.service.UmsRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     private UmsRoleDao roleDao;
     @Autowired
     private UmsRoleMapper umsRoleMapper;
+    @Autowired
+    private UmsRoleMenuRelationMapper roleMenuRelationMapper;
     @Autowired
     private UmsAdminCacheService adminCacheService;
 
@@ -67,5 +71,24 @@ public class UmsRoleServiceImpl implements UmsRoleService {
         int count = umsRoleMapper.deleteByPrimaryKey(id);
         adminCacheService.delResourceListByRoleIds(id);
         return count;
+    }
+
+    @Override
+    public List<UmsMenu> listMenu(Long id) {
+        return roleDao.getMenuListByRoleId(id);
+    }
+
+    @Override
+    public int allocMenu(Long roleId, List<Long> menuIds) {
+        //删除原有关系
+        roleMenuRelationMapper.deleteRelationById(roleId);
+        //建立新关系
+        for (Long menuId : menuIds) {
+            UmsRoleMenuRelation umsRoleMenuRelation = new UmsRoleMenuRelation();
+            umsRoleMenuRelation.setRoleId(roleId);
+            umsRoleMenuRelation.setMenuId(menuId);
+            roleMenuRelationMapper.insert(umsRoleMenuRelation);
+        }
+        return menuIds.size();
     }
 }
