@@ -1,6 +1,7 @@
 package com.manage.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import com.manage.dao.UmsAdminRoleRelationDao;
 import com.manage.mapper.UmsAdminRoleRelationMapper;
 import com.manage.model.UmsAdmin;
 import com.manage.model.UmsAdminRoleRelation;
@@ -27,6 +28,8 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     private RedisService redisService;
     @Autowired
     private UmsAdminRoleRelationMapper adminRoleRelationMapper;
+    @Autowired
+    private UmsAdminRoleRelationDao adminRoleRelationDao;
     @Value("${redis.database}")
     private String REDIS_DATABASE;
     @Value("${redis.expire.common}")
@@ -80,6 +83,16 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
         if (CollUtil.isNotEmpty(umsAdminRoleRelations)) {
             String keyPrefix = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":";
             List<String> keys = umsAdminRoleRelations.stream().map(relation -> keyPrefix + relation.getAdminId()).collect(Collectors.toList());
+            redisService.del(keys);
+        }
+    }
+
+    @Override
+    public void delResourceListByResource(Long resourceId) {
+        List<Long> adminIdList = adminRoleRelationDao.getAdminIdList(resourceId);
+        if (CollUtil.isNotEmpty(adminIdList)){
+            String keyPrefix=REDIS_DATABASE+":"+REDIS_KEY_RESOURCE_LIST+":";
+            List<String> keys = adminIdList.stream().map(adminId -> keyPrefix + adminId).collect(Collectors.toList());
             redisService.del(keys);
         }
     }

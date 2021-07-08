@@ -2,16 +2,15 @@ package com.manage.controller;
 
 import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
+import com.manage.component.DynamicSecurityMetadataSource;
 import com.manage.model.UmsResource;
+import com.manage.model.UmsRole;
 import com.manage.service.UmsResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,8 @@ import java.util.List;
 @Api(tags = "后台资源管理")
 @RequestMapping("/resource")
 public class UmsResourceController {
+    @Autowired
+    private DynamicSecurityMetadataSource dynamicSecurityMetadataSource;
     @Autowired
     private UmsResourceService umsResourceService;
 
@@ -44,5 +45,18 @@ public class UmsResourceController {
     public CommonResult<List<UmsResource>> listAll(){
         List<UmsResource> umsResources = umsResourceService.listAll();
         return CommonResult.success(umsResources);
+    }
+
+    @ApiOperation("修改后台资源信息")
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult update(@PathVariable Long id, @RequestBody UmsResource umsResource){
+        int update = umsResourceService.update(id, umsResource);
+        //后台资源发生变化时，清空缓存在Map对象中的后台资源规则数据
+        dynamicSecurityMetadataSource.clearDataSource();
+        if (update>0){
+            return CommonResult.success(update);
+        }
+        return CommonResult.failed();
     }
 }

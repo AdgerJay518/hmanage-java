@@ -1,6 +1,7 @@
 package com.manage.service;
 
 import com.manage.model.UmsResource;
+import com.manage.model.UmsRole;
 
 import java.util.List;
 
@@ -16,12 +17,11 @@ public interface UmsResourceService {
 
     /**
      * 分页查询
-     * @param categoryId
-     * @param nameKeyword
-     * @param urlKeyword
-     * @param pageSize
-     * @param pageNum
-     * @return
      */
     List<UmsResource> list(Long categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum);
+
+    /**
+     *更行资源列表
+     */
+    int update(Long id, UmsResource umsResource);
 }

@@ -14,4 +14,11 @@ public interface UmsResourceMapper {
      * @return
      */
     List<UmsResource> selectByResource(UmsResource resource);
+
+    /**
+     * 更新资源列表
+     * @param resource
+     * @return
+     */
+    int updateByUmsResource(UmsResource resource);
 }

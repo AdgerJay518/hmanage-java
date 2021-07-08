@@ -3,6 +3,8 @@ package com.manage.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.manage.mapper.UmsResourceMapper;
 import com.manage.model.UmsResource;
+import com.manage.model.UmsRole;
+import com.manage.service.UmsAdminCacheService;
 import com.manage.service.UmsResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,8 @@ import java.util.List;
 public class UmsResourceServiceImpl implements UmsResourceService {
     @Autowired
     private UmsResourceMapper resourceMapper;
-
+    @Autowired
+    private UmsAdminCacheService cacheService;
     /**
      * 查询所有资源
      * @return
@@ -52,6 +55,14 @@ public class UmsResourceServiceImpl implements UmsResourceService {
             umsResource.setUrl("%"+urlKeyword+"%");
         }
         return resourceMapper.selectByResource(umsResource);
+    }
+
+    @Override
+    public int update(Long id, UmsResource umsResource) {
+        umsResource.setId(id);
+        int i = resourceMapper.updateByUmsResource(umsResource);
+        cacheService.delResourceListByResource(id);
+        return i;
     }
 
 
