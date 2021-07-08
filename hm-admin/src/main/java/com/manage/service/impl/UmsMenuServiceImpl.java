@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,56 @@ public class UmsMenuServiceImpl implements UmsMenuService {
                 .filter(menu -> menu.getParentId().equals(0L))
                 .map(menu -> covertMenuNode(menu, menuList)).collect(Collectors.toList());
         return result;
+    }
+
+    @Override
+    public int updateHidden(Long id, Integer hidden) {
+        UmsMenu umsMenu = new UmsMenu();
+        umsMenu.setId(id);
+        umsMenu.setHidden(hidden);
+        return umsMenuMapper.updateByUmsMenu(umsMenu);
+    }
+
+    @Override
+    public UmsMenu getItem(Long id) {
+        return umsMenuMapper.selectById(id);
+    }
+
+    @Override
+    public int update(Long id, UmsMenu umsMenu) {
+        umsMenu.setId(id);
+        updateLevel(umsMenu);
+        return umsMenuMapper.updateByUmsMenu(umsMenu);
+    }
+
+    @Override
+    public void updateLevel(UmsMenu umsMenu) {
+        if (umsMenu.getParentId()==0){
+            //没有父级菜单时为一级菜单
+            umsMenu.setLevel(0);
+        }
+        else{
+            UmsMenu parentMenu = umsMenuMapper.selectById(umsMenu.getParentId());
+            //如果父级菜单存在，菜单级数+1
+            if (parentMenu!=null){
+                umsMenu.setLevel(parentMenu.getLevel()+1);
+            }else {
+                //如果父级菜单不存在，该菜单为一级菜单
+                umsMenu.setLevel(0);
+            }
+        }
+    }
+
+    @Override
+    public int create(UmsMenu umsMenu) {
+        umsMenu.setCreateTime(new Date());
+        updateLevel(umsMenu);
+        return umsMenuMapper.insert(umsMenu);
+    }
+
+    @Override
+    public int delete(Long id) {
+        return umsMenuMapper.delete(id);
     }
 
     /**

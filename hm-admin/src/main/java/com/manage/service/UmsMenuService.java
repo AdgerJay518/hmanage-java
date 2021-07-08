@@ -19,4 +19,34 @@ public interface UmsMenuService {
      * 返回树形结构菜单列表
      */
     List<UmsMenuNode> treeList();
+
+    /**
+     * 菜单是否显示
+     */
+    int updateHidden(Long id, Integer hidden);
+
+    /**
+     * 根据id获取菜单详
+     */
+    UmsMenu getItem(Long id);
+
+    /**
+     *更新菜单
+     */
+    int update(Long id,UmsMenu umsMenu);
+
+    /**
+     *修改菜单级别
+     */
+    void updateLevel(UmsMenu umsMenu);
+
+    /**
+     *新建后台菜单
+     */
+    int create(UmsMenu umsMenu);
+
+    /**
+     * 根据id删除菜单
+     */
+    int delete(Long id);
 }

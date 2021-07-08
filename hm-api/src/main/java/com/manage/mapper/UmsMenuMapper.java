@@ -12,5 +12,8 @@ import java.util.List;
 public interface UmsMenuMapper {
     List<UmsMenu> selectByParentId(Long parentId);
     List<UmsMenu> selectByUmsMenu(UmsMenu umsMenu);
-
+    int updateByUmsMenu(UmsMenu umsMenu);
+    UmsMenu selectById(Long id);
+    int insert(UmsMenu umsMenu);
+    int delete(Long id);
 }

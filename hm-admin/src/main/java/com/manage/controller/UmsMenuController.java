@@ -42,4 +42,56 @@ public class UmsMenuController {
         List<UmsMenuNode> list = umsMenuService.treeList();
         return CommonResult.success(list);
     }
+
+    @ApiOperation("菜单是否显示")
+    @RequestMapping(value = "/updateHidden/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateHidden(@PathVariable Long id,@RequestParam("hidden") Integer hidden){
+        int i = umsMenuService.updateHidden(id, hidden);
+        if (i>0){
+            return CommonResult.success(i);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("根据id获取菜单")
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<UmsMenu> getItem(@PathVariable Long id){
+        UmsMenu item = umsMenuService.getItem(id);
+        return CommonResult.success(item);
+    }
+
+    @ApiOperation("根据id修改菜单信息")
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult update(@PathVariable Long id,@RequestBody UmsMenu umsMenu){
+        int update = umsMenuService.update(id, umsMenu);
+        if (update>0){
+            return CommonResult.success(update);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("新建后台菜单")
+    @RequestMapping(value = "/create" ,method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult create(@RequestBody UmsMenu umsMenu){
+        int i = umsMenuService.create(umsMenu);
+        if (i>0){
+            return CommonResult.success(i);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("删除后台菜单")
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult delete(@PathVariable Long id){
+        int delete = umsMenuService.delete(id);
+        if (delete>0){
+            return CommonResult.success(delete);
+        }
+        return CommonResult.failed();
+    }
 }
