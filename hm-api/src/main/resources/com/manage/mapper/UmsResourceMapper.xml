@@ -52,4 +52,24 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <insert id="insert" parameterType="com.manage.model.UmsResource">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        ums_resource
+        (create_time, name, url,description, category_id)
+        values
+        (#{createTime,jdbcType=TIMESTAMP},
+        #{name,jdbcType=VARCHAR},
+        #{url,jdbcType=VARCHAR},
+        #{description,jdbcType=VARCHAR},
+        #{categoryId,jdbcType=BIGINT})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from ums_resource
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>

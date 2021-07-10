@@ -4,7 +4,6 @@ import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
 import com.manage.component.DynamicSecurityMetadataSource;
 import com.manage.model.UmsResource;
-import com.manage.model.UmsRole;
 import com.manage.service.UmsResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -56,6 +55,30 @@ public class UmsResourceController {
         dynamicSecurityMetadataSource.clearDataSource();
         if (update>0){
             return CommonResult.success(update);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("添加创建后台资源")
+    @RequestMapping(value = "/create" ,method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult create(@RequestBody UmsResource umsResource){
+        int i = umsResourceService.create(umsResource);
+        dynamicSecurityMetadataSource.clearDataSource();
+        if (i>0){
+            return CommonResult.success(i);
+        }
+            return CommonResult.failed();
+
+    }
+
+    @ApiOperation("根据id删除后台资源")
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult delete(@PathVariable Long id){
+        int delete = umsResourceService.delete(id);
+        if (delete>0){
+            return CommonResult.success(delete);
         }
         return CommonResult.failed();
     }

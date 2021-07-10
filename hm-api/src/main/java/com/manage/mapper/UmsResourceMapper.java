@@ -21,4 +21,18 @@ public interface UmsResourceMapper {
      * @return
      */
     int updateByUmsResource(UmsResource resource);
+
+    /**
+     * 数据库插入新资源
+     * @param umsResource
+     * @return
+     */
+    int insert(UmsResource umsResource);
+
+    /**
+     * 根据id删除后台资源
+     * @param id
+     * @return
+     */
+    int deleteById(Long id);
 }

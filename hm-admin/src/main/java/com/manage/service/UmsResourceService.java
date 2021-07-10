@@ -1,7 +1,6 @@
 package com.manage.service;
 
 import com.manage.model.UmsResource;
-import com.manage.model.UmsRole;
 
 import java.util.List;
 
@@ -24,4 +23,14 @@ public interface UmsResourceService {
      *更行资源列表
      */
     int update(Long id, UmsResource umsResource);
+
+    /**
+     *添加创建后台资源
+     */
+    int create(UmsResource umsResource);
+
+    /**
+     *根据id删除后台资源
+     */
+    int delete(Long id);
 }

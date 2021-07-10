@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,6 +62,19 @@ public class UmsResourceServiceImpl implements UmsResourceService {
     public int update(Long id, UmsResource umsResource) {
         umsResource.setId(id);
         int i = resourceMapper.updateByUmsResource(umsResource);
+        cacheService.delResourceListByResource(id);
+        return i;
+    }
+
+    @Override
+    public int create(UmsResource umsResource) {
+        umsResource.setCreateTime(new Date());
+        return resourceMapper.insert(umsResource);
+    }
+
+    @Override
+    public int delete(Long id) {
+        int i = resourceMapper.deleteById(id);
         cacheService.delResourceListByResource(id);
         return i;
     }
