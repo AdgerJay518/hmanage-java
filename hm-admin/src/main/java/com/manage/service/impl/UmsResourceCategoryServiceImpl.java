@@ -6,6 +6,7 @@ import com.manage.service.UmsResourceCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,5 +21,22 @@ public class UmsResourceCategoryServiceImpl implements UmsResourceCategoryServic
     @Override
     public List<UmsResourceCategory> listAll() {
         return umsResourceCategoryMapper.selectAll();
+    }
+
+    @Override
+    public int update(Long id, UmsResourceCategory umsResourceCategory) {
+        umsResourceCategory.setId(id);
+        return umsResourceCategoryMapper.updateByUmsResourceCategory(umsResourceCategory);
+    }
+
+    @Override
+    public int create(UmsResourceCategory umsResourceCategory) {
+        umsResourceCategory.setCreateTime(new Date());
+        return umsResourceCategoryMapper.insert(umsResourceCategory);
+    }
+
+    @Override
+    public int delete(Long id) {
+        return umsResourceCategoryMapper.delete(id);
     }
 }

@@ -7,9 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +28,39 @@ public class UmsResourceCategoryController {
     public CommonResult<List<UmsResourceCategory>> listAll() {
         List<UmsResourceCategory> resourceList = resourceCategoryService.listAll();
         return CommonResult.success(resourceList);
+    }
+
+    @ApiOperation("修改后台资源分类")
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult update(@PathVariable Long id,
+                               @RequestBody UmsResourceCategory umsResourceCategory){
+        int update = resourceCategoryService.update(id,umsResourceCategory);
+        if (update>0){
+            return CommonResult.success(update);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("创建后台资源分类")
+    @RequestMapping(value = "/create",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult create(@RequestBody UmsResourceCategory umsResourceCategory){
+        int i = resourceCategoryService.create(umsResourceCategory);
+        if (i>0){
+            return CommonResult.success(i);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("根据id删除后台资源")
+    @RequestMapping(value = "/delete/{id}" ,method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult delete(@PathVariable Long id){
+        int delete = resourceCategoryService.delete(id);
+        if (delete>0){
+            return CommonResult.success(delete);
+        }
+        return CommonResult.failed();
     }
 }

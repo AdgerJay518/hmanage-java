@@ -15,4 +15,38 @@
         <include refid="Base_Column_List" />
         from ums_resource_category;
     </select>
+
+    <delete id="updateByUmsResourceCategory" parameterType="com.manage.model.UmsResourceCategory">
+        update ums_resource_category
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.manage.model.UmsResourceCategory">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into ums_resource_category (create_time, name, sort
+        )
+        values (
+        #{createTime,jdbcType=TIMESTAMP},
+        #{name,jdbcType=VARCHAR},
+        #{sort,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from ums_resource_category
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>
