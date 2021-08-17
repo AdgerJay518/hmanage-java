@@ -1,12 +1,16 @@
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsAdminRoleRelationMapper.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsRoleResourceRelationMapper.java
+D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\SmsSport.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsMenuMapper.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\UmsResourceCategory.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\UmsResource.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\UmsMenu.java
+D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\SmsSportCategory.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\UmsAdminRoleRelation.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsRoleMapper.java
+D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\SmsSportMapper.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsAdminMapper.java
+D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\SmsSportCategoryMapper.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsResourceCategoryMapper.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\model\UmsRoleResourceRelation.java
 D:\IdeaProjects\hm-java\hm-api\src\main\java\com\manage\mapper\UmsResourceMapper.java

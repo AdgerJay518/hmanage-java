@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.SmsSportMapper">
+    <resultMap id="BaseResultMap" type="com.manage.model.SmsSport">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="sport_category_id" jdbcType="BIGINT" property="sportCategoryId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="pic" jdbcType="VARCHAR" property="pic" />
+        <result column="sport_sn" jdbcType="VARCHAR" property="sportSn" />
+        <result column="recommand_status" jdbcType="INTEGER" property="recommandStatus" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+        <result column="sport_category_name" jdbcType="VARCHAR" property="sportCategoryName" />
+        <result column="calorie" jdbcType="INTEGER" property="calorie" />
+        <result column="gift_growth" jdbcType="INTEGER" property="giftGrowth" />
+        <result column="gift_point" jdbcType="INTEGER" property="giftPoint" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="unit" jdbcType="VARCHAR" property="unit" />
+        <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+        <result column="note" jdbcType="VARCHAR" property="note" />
+        <result column="album_pics" jdbcType="VARCHAR" property="albumPics" />
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.manage.model.SmsSport">
+        <result column="detail_title" jdbcType="VARCHAR" property="detailTitle" />
+        <result column="detail_desc" jdbcType="LONGVARCHAR" property="detailDesc" />
+        <result column="detail_html" jdbcType="LONGVARCHAR" property="detailHtml" />
+        <result column="detail_mobile_html" jdbcType="LONGVARCHAR" property="detailMobileHtml" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, sport_category_id, name, pic, sport_sn,recommand_status,
+    sort, sport_category_name, calorie , gift_growth, gift_point, description,
+    unit, keywords, note, album_pics
+    </sql>
+    <update id="updateSport" parameterType="map">
+        update sms_sport
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="sportCategoryId != null">
+                sport_category_id = #{sportCategoryId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pic != null">
+                pic = #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="sportSn != null">
+                sport_sn = #{sportSn,jdbcType=VARCHAR},
+            </if>
+            <if test="recommandStatus != null">
+                recommand_status = #{recommandStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="sportCategoryName != null">
+                sport_category_name = #{sportCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="calorie != null">
+                calorie = #{calorie,jdbcType=INTEGER},
+            </if>
+            <if test="giftGrowth != null">
+                gift_growth = #{giftGrowth,jdbcType=INTEGER},
+            </if>
+            <if test="giftPoint != null">
+                gift_point = #{giftPoint,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null">
+                note = #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="albumPics != null">
+                album_pics = #{albumPics,jdbcType=VARCHAR},
+            </if>
+            <if test="detailTitle != null">
+                detail_title = #{detailTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="detailDesc != null">
+                detail_desc = #{detailDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="detailHtml != null">
+                detail_html = #{detailHtml,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="detailMobileHtml != null">
+                detail_mobile_html = #{detailMobileHtml,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where sport_category_id = #{sportCategoryId,jdbcType=BIGINT}
+
+    </update>
+
+    <select id="selectBySport" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sms_sport
+        <if test="_parameter != null">
+            <where>
+                <if test="name!=null">
+                    and name like #{name,jdbcType=VARCHAR}
+                </if>
+                <if test="sportSn!=null">
+                    and sport_sn like #{sportSn,jdbcType=VARCHAR}
+                </if>
+                <if test="sportCategoryId!=null">
+                    and sport_category_id = #{sportCategoryId,jdbcType=BIGINT}
+                </if>
+            </where>
+        </if>
+    </select>
+</mapper>
