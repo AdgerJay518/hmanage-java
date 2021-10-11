@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.PlanItemMapper">
+
+    <resultMap id="BaseResultMap" type="com.manage.model.PlanItem">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="sf_id" jdbcType="BIGINT" property="sfId" />
+        <result column="member_id" jdbcType="BIGINT" property="memberId" />
+        <result column="quantity" jdbcType="INTEGER" property="quantity" />
+        <result column="calorie" jdbcType="DECIMAL" property="calorie" />
+        <result column="sf_pic" jdbcType="VARCHAR" property="sfPic" />
+        <result column="sf_name" jdbcType="VARCHAR" property="sfName" />
+        <result column="sf_sn" jdbcType="VARCHAR" property="sfSn" />
+        <result column="member_nickname" jdbcType="VARCHAR" property="memberNickname" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
+        <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
+        <result column="sf_category_id" jdbcType="BIGINT" property="sfCategoryId" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, sf_id, member_id, quantity, calorie, sf_pic, sf_name, sf_sn,
+        member_nickname, create_date, modify_date, delete_status,
+        sf_category_id
+    </sql>
+
+    <select id="selectByPlan" parameterType="com.manage.model.PlanItem" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from plan_item
+        where
+        member_id = #{memberId,jdbcType=BIGINT}
+        <if test="sfId!=null">
+            and sf_id = #{sfId,jdbcType=BIGINT}
+        </if>
+
+    </select>
+
+    <insert id="insert" parameterType="com.manage.model.PlanItem">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into plan_item (sf_id, member_id,
+        quantity, calorie, sf_pic,
+        sf_name, sf_sn,
+        member_nickname, create_date, modify_date,
+        delete_status, sf_category_id)
+        values (
+        #{sfId,jdbcType=BIGINT},#{memberId,jdbcType=BIGINT},
+        #{quantity,jdbcType=INTEGER}, #{calorie,jdbcType=DECIMAL}, #{sfPic,jdbcType=VARCHAR},
+        #{sfName,jdbcType=VARCHAR}, #{sfSn,jdbcType=VARCHAR},#{memberNickname,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP},
+        #{deleteStatus,jdbcType=INTEGER}, #{sfCategoryId,jdbcType=BIGINT})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.manage.model.PlanItem">
+        update plan_item
+        set sf_id = #{sfId,jdbcType=BIGINT},
+            member_id = #{memberId,jdbcType=BIGINT},
+            quantity = #{quantity,jdbcType=INTEGER},
+            calorie = #{calorie,jdbcType=DECIMAL},
+            sf_pic = #{sfPic,jdbcType=VARCHAR},
+            sf_name = #{sfName,jdbcType=VARCHAR},
+            sf_sn = #{sfSn,jdbcType=VARCHAR},
+            member_nickname = #{memberNickname,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+            delete_status = #{deleteStatus,jdbcType=INTEGER},
+            sf_category_id = #{sfCategoryId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateBySfAndMemberId" parameterType="com.manage.model.PlanItem">
+        update
+                plan_item
+        set quantity = #{quantity,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT} and member_id = #{memberId,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPlan" parameterType="com.manage.model.PlanItem">
+        delete from plan_item
+        where id = #{id,jdbcType=BIGINT} and member_id = #{memberId,jdbcType=BIGINT}
+    </delete>
+
+    <select id="selectByPlanIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from plan_item
+        where
+        member_id = #{memberId,jdbcType=BIGINT}
+        <if test="planIds!=null">
+            and id in
+            <foreach collection="planIds" index="index" item="planIds" open="(" separator="," close=")">
+                #{planIds}
+            </foreach>
+        </if>
+    </select>
+</mapper>

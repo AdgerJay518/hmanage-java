@@ -18,4 +18,6 @@ public interface SmsSportMapper {
     void updateSport(SmsSport smsSport);
 
     List<SmsSport> selectBySport(SmsSport smsSport);
+
+    SmsSport selectByPrimaryKey(Long id);
 }

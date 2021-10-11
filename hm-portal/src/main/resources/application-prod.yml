@@ -15,9 +15,16 @@ spring:
     port: 6379
     password:
     timeout: 300ms
+    key:
+      authCode: 'ums:authCode'
+      orderId: 'oms:orderId'
+      member: 'ums:member'
+    expire:
+      authCode: 90 # 验证码超期时间
+      common: 86400 # 24小时
 
 jwt:
   tokenHeader: Authorization
-  secret: d5a4sf6sf1as4d56w464e65q54asd45
+  secret: wpa4sf6sf1as4d56w464aswq54asd45
   expiration: 604800
   tokenHead: 'Bearer '

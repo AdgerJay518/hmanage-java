@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.dao.PortalOrderItemDao">
+
+    <insert id="insertList" parameterType="java.util.List">
+        insert into Pms_order_item
+        (order_id,order_sn,sf_id,sf_pic,sf_name,sf_sn,sf_calorie,sf_quantity,sf_category_id)
+        values
+        <foreach collection="orderItem" item="items" separator=",">
+            (#{items.orderId,jdbcType=BIGINT},
+            #{items.orderSn,jdbcType=VARCHAR},
+            #{items.sfId,jdbcType=BIGINT},
+            #{items.sfPic,jdbcType=VARCHAR},
+            #{items.sfName,jdbcType=VARCHAR},
+            #{items.sfSn,jdbcType=VARCHAR},
+            #{items.sfCalorie,jdbcType=DECIMAL},
+            #{items.sfQuantity,jdbcType=INTEGER},
+            #{items.sfCategoryId,jdbcType=BIGINT}
+            )
+        </foreach>
+    </insert>
+</mapper>

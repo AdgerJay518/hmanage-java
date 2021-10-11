@@ -29,7 +29,7 @@ public class SmsSportController {
     @Autowired
     private SmsSportService smsSportService;
 
-    @ApiOperation("查询商品")
+    @ApiOperation("查询运动")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<CommonPage<SmsSport>> getList(SmsSportQueryParam sportQueryParam,

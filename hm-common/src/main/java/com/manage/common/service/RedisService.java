@@ -28,5 +28,11 @@ public interface RedisService {
      * 批量删除属性
      */
     Long del(List<String> keys);
+
+
+    /**
+     * 按delta递增
+     */
+    Long incr(String key, long delta);
 }
 

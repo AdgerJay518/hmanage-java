@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.PmsOrderItemMapper">
+
+    <resultMap id="BaseResultMap" type="com.manage.model.PmsOrderItem">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="order_id" jdbcType="BIGINT" property="orderId" />
+        <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+        <result column="sf_id" jdbcType="BIGINT" property="sfId" />
+        <result column="sf_pic" jdbcType="VARCHAR" property="sfPic" />
+        <result column="sf_name" jdbcType="VARCHAR" property="sfName" />
+        <result column="sf_sn" jdbcType="VARCHAR" property="sfSn" />
+        <result column="sf_calorie" jdbcType="DECIMAL" property="sfCalorie" />
+        <result column="sf_quantity" jdbcType="INTEGER" property="sfQuantity" />
+        <result column="sf_category_id" jdbcType="BIGINT" property="sfCategoryId" />
+        <result column="gift_integration" jdbcType="INTEGER" property="giftIntegration" />
+        <result column="gift_growth" jdbcType="INTEGER" property="giftGrowth" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, order_id, order_sn, sf_id, sf_pic, sf_name,sf_sn,
+    sf_calorie, sf_quantity, sf_category_id, gift_integration, gift_growth
+    </sql>
+
+    <select id="selectByPmsOrderItem" resultType="com.manage.model.PmsOrderItemExample" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pms_order_item
+        where order_id in
+        <foreach collection="orderIds" index="index" item="item" open="(" separator="," close=")">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+    </select>
+</mapper>

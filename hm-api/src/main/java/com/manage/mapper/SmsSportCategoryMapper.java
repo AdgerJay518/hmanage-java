@@ -16,4 +16,5 @@ public interface SmsSportCategoryMapper {
     SmsSportCategory selectById(Long id);
     int insert(SmsSportCategory sportCategoryParam);
     int update(SmsSportCategory smsSportCategory);
+    List<SmsSportCategory> selectByCategory(SmsSportCategory smsSportCategory);
 }

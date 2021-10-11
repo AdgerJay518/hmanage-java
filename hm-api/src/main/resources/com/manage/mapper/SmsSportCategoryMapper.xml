@@ -181,4 +181,10 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectByCategory" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sms_sport_category
+    </select>
 </mapper>

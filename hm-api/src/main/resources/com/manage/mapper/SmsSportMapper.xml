@@ -21,14 +21,17 @@
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.manage.model.SmsSport">
         <result column="detail_title" jdbcType="VARCHAR" property="detailTitle" />
-        <result column="detail_desc" jdbcType="LONGVARCHAR" property="detailDesc" />
-        <result column="detail_html" jdbcType="LONGVARCHAR" property="detailHtml" />
-        <result column="detail_mobile_html" jdbcType="LONGVARCHAR" property="detailMobileHtml" />
+        <result column="detail_desc" jdbcType="VARCHAR" property="detailDesc" />
+        <result column="detail_html" jdbcType="VARCHAR" property="detailHtml" />
+        <result column="detail_mobile_html" jdbcType="VARCHAR" property="detailMobileHtml" />
     </resultMap>
     <sql id="Base_Column_List">
         id, sport_category_id, name, pic, sport_sn,recommand_status,
     sort, sport_category_name, calorie , gift_growth, gift_point, description,
     unit, keywords, note, album_pics
+    </sql>
+    <sql id="Blob_Column_List">
+        detail_desc, detail_html, detail_mobile_html
     </sql>
     <update id="updateSport" parameterType="map">
         update sms_sport
@@ -115,5 +118,14 @@
                 </if>
             </where>
         </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from sms_sport
+        where sport_category_id = #{id,jdbcType=BIGINT}
     </select>
 </mapper>

@@ -40,5 +40,10 @@ public class RedisServiceImpl implements RedisService {
     public Long del(List<String> keys) {
         return redisTemplate.delete(keys);
     }
+
+    @Override
+    public Long incr(String key, long delta) {
+        return redisTemplate.opsForValue().increment(key, delta);
+    }
 }
 

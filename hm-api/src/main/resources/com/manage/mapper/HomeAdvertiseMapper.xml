@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.HomeAdvertiseMapper">
+
+    <resultMap id="BaseResultMap" type="com.manage.model.HomeAdvertise">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="type" jdbcType="INTEGER" property="type" />
+        <result column="pic" jdbcType="VARCHAR" property="pic" />
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="click_count" jdbcType="INTEGER" property="clickCount" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="note" jdbcType="VARCHAR" property="note" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, type, pic, start_time, end_time, status, click_count,  url,
+    note, sort
+    </sql>
+
+    <select id="select" resultType="com.manage.model.HomeAdvertise">
+        select
+        <include refid="Base_Column_List" />
+        from home_advertise
+        order by sort desc
+    </select>
+</mapper>
