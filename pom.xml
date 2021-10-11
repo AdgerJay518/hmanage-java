@@ -10,6 +10,7 @@
         <module>hm-common</module>
         <module>hm-security</module>
         <module>hm-api</module>
+        <module>hm-portal</module>
     </modules>
 
     <groupId>org.example</groupId>

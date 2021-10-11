@@ -1,0 +1,8 @@
+target/
+.idea/
+*.iml
+/hm-admin/src/main/resources/application.yml
+/hm-admin/target/
+/hm-api/target/
+/hm-common/target/
+/hm-security/target/
