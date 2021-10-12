@@ -50,7 +50,6 @@ public class PmsPortalOrderController {
     @ResponseBody
     public CommonResult generateOrder(@RequestBody OrderParam orderParam) {
         Map<String, Object> result = pmsPortalOrderService.generateOrder(orderParam);
-        System.out.println(result);
         return CommonResult.success(result, "成功");
     }
 

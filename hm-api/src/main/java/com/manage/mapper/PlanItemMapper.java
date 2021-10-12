@@ -19,4 +19,6 @@ public interface PlanItemMapper {
     int deleteByPlan(PlanItem planItem);
 
     List<PlanItem> selectByPlanIds(Long memberId, List<Long> planIds);
+
+    int deleteByIds(Long memberId, List<Long> planIds);
 }

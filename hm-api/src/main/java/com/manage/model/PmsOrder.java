@@ -35,7 +35,7 @@ public class PmsOrder implements Serializable {
     @ApiModelProperty(value = "计划总时长")
     private BigDecimal totalTime;
 
-    @ApiModelProperty(value = "订单来源：0->PC订单；1->app订单")
+    @ApiModelProperty(value = "来源：0->PC；1->app")
     private Integer sourceType;
 
     @ApiModelProperty(value = "状态：0->待执行；1->正在执行；2->已完成；3->已关闭；4->无效计划")

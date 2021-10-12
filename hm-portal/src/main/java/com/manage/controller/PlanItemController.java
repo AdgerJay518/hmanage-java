@@ -2,6 +2,7 @@ package com.manage.controller;
 
 import com.manage.common.api.CommonResult;
 import com.manage.dto.PlanItemParam;
+import com.manage.dto.PlanItemParams;
 import com.manage.model.PlanItem;
 import com.manage.service.PlanItemService;
 import com.manage.service.UmsMemberService;
@@ -62,6 +63,17 @@ public class PlanItemController {
     @ResponseBody
     public CommonResult delete(@RequestBody PlanItemParam param) {
         int count = planItemService.delete(memberService.getCurrentMember().getId(), param.getId());
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("删除多条计划")
+    @RequestMapping(value = "/deletes", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult deletes(@RequestBody PlanItemParams param) {
+        int count = planItemService.deletes(memberService.getCurrentMember().getId(), param.getPlanIds());
         if (count > 0) {
             return CommonResult.success(count);
         }

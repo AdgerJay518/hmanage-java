@@ -15,4 +15,6 @@ public interface PlanItemService {
     int delete(Long memberId, Long id);
 
     List<PlanItem> getItemList(Long memberId, List<Long> planIds);
+
+    int deletes(Long id, List<Long> planIds);
 }

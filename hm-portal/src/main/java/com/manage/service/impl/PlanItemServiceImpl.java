@@ -79,6 +79,11 @@ public class PlanItemServiceImpl implements PlanItemService {
         return planItemMapper.selectByPlanIds(memberId, planIds);
     }
 
+    @Override
+    public int deletes(Long id, List<Long> planIds) {
+        return planItemMapper.deleteByIds(id,planIds);
+    }
+
     /**
      * 根据用户id，运动或食品id获取计划中的sf
      * @param planItem

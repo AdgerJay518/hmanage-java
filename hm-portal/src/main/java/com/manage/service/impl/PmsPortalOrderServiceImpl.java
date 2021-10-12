@@ -111,6 +111,8 @@ public class PmsPortalOrderServiceImpl implements PmsPortalOrderService {
         PmsOrder order = new PmsOrder();
         order.setMemberId(currentMember.getId());
         order.setCreateTime(new Date());
+        order.setStartTime(new Date());
+        order.setConfirmTime(new Date());
         order.setMemberUsername(currentMember.getUsername());
         order.setSourceType(1);
         order.setTotalCalorie(orderParam.getTotalCalorie());

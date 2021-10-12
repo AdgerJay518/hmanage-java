@@ -94,4 +94,13 @@
             </foreach>
         </if>
     </select>
+
+    <delete id="deleteByIds">
+        delete from plan_item
+        where member_id = #{memberId,jdbcType=BIGINT}
+        and id in
+        <foreach collection="planIds" index="index" item="planIds" open="(" separator="," close=")">
+            #{planIds}
+        </foreach>
+    </delete>
 </mapper>
