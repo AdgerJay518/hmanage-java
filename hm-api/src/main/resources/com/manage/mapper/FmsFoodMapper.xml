@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.FmsFoodMapper">
+    <resultMap id="BaseResultMap" type="com.manage.model.FmsFood">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="food_category_id" jdbcType="BIGINT" property="foodCategoryId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="pic" jdbcType="VARCHAR" property="pic" />
+        <result column="food_sn" jdbcType="VARCHAR" property="foodSn" />
+        <result column="recommand_status" jdbcType="INTEGER" property="recommandStatus" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+        <result column="food_category_name" jdbcType="VARCHAR" property="foodCategoryName" />
+        <result column="calorie" jdbcType="INTEGER" property="calorie" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="unit" jdbcType="VARCHAR" property="unit" />
+        <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+        <result column="note" jdbcType="VARCHAR" property="note" />
+        <result column="album_pics" jdbcType="VARCHAR" property="albumPics" />
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.manage.model.FmsFood">
+        <result column="detail_title" jdbcType="VARCHAR" property="detailTitle" />
+        <result column="detail_desc" jdbcType="VARCHAR" property="detailDesc" />
+        <result column="detail_html" jdbcType="VARCHAR" property="detailHtml" />
+        <result column="detail_mobile_html" jdbcType="VARCHAR" property="detailMobileHtml" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, food_category_id, name, pic, food_sn,recommand_status,
+    sort, food_category_name, calorie , description,
+    unit, keywords, note, album_pics
+    </sql>
+    <sql id="Blob_Column_List">
+        detail_desc, detail_html, detail_mobile_html
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from fms_food
+        where food_category_id = #{id,jdbcType=BIGINT}
+    </select>
+
+</mapper>
