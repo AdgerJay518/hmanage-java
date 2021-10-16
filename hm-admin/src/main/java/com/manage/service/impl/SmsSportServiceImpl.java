@@ -1,7 +1,9 @@
 package com.manage.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.manage.dao.SmsSportDao;
 import com.manage.dto.SmsSportQueryParam;
+import com.manage.dto.SmsSportResult;
 import com.manage.mapper.SmsSportMapper;
 import com.manage.model.SmsSport;
 import com.manage.service.SmsSportService;
@@ -20,6 +22,9 @@ public class SmsSportServiceImpl implements SmsSportService {
     @Autowired
     private SmsSportMapper smsSportMapper;
 
+    @Autowired
+    private SmsSportDao sportDao;
+
     @Override
     public List<SmsSport> list(SmsSportQueryParam sportQueryParam,
                                Integer pageSize,
@@ -37,5 +42,10 @@ public class SmsSportServiceImpl implements SmsSportService {
         }
         System.out.println(smsSport.getName()+"+"+smsSport.getSportSn()+"+"+smsSport.getSportCategoryId());
         return smsSportMapper.selectBySport(smsSport);
+    }
+
+    @Override
+    public SmsSportResult getUpdateInfo(Long id) {
+        return sportDao.getUpdateInfo(id);
     }
 }

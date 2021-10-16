@@ -1,6 +1,7 @@
 package com.manage.service;
 
 import com.manage.dto.SmsSportQueryParam;
+import com.manage.dto.SmsSportResult;
 import com.manage.model.SmsSport;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface SmsSportService {
      * @return
      */
     List<SmsSport> list(SmsSportQueryParam sportQueryParam, Integer pageSize, Integer pageNum);
+
+    SmsSportResult getUpdateInfo(Long id);
 }

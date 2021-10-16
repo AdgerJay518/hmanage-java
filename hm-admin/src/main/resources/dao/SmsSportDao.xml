@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.dao.SmsSportDao">
+
+    <resultMap id="updateInfoMap" type="com.manage.dto.SmsSportResult" extends="com.manage.mapper.SmsSportMapper.ResultMapWithBLOBs">
+        <result column="cateParentId" jdbcType="BIGINT" property="cateParentId" />
+    </resultMap>
+
+    <select id="getUpdateInfo" resultMap="updateInfoMap">
+        SELECT *,
+               pc.parent_id cateParentId
+        FROM sms_sport p
+                     LEFT JOIN sms_sport_category pc on pc.id = p.sport_category_id
+        WHERE p.id=#{id};
+    </select>
+</mapper>

@@ -3,16 +3,14 @@ package com.manage.controller;
 import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
 import com.manage.dto.SmsSportQueryParam;
+import com.manage.dto.SmsSportResult;
 import com.manage.model.SmsSport;
 import com.manage.service.SmsSportService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,5 +35,13 @@ public class SmsSportController {
                                                       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<SmsSport> productList = smsSportService.list(sportQueryParam, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(productList));
+    }
+
+    @ApiOperation("根据id获取编辑信息")
+    @RequestMapping(value = "/updateInfo/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<SmsSportResult> getUpdateInfo(@PathVariable Long id) {
+        SmsSportResult sportResult = smsSportService.getUpdateInfo(id);
+        return CommonResult.success(sportResult);
     }
 }
