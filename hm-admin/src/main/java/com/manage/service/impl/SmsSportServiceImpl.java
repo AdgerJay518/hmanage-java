@@ -40,12 +40,41 @@ public class SmsSportServiceImpl implements SmsSportService {
         if (sportQueryParam.getSportCategoryId()!=null){
             smsSport.setSportCategoryId(sportQueryParam.getSportCategoryId());
         }
-        System.out.println(smsSport.getName()+"+"+smsSport.getSportSn()+"+"+smsSport.getSportCategoryId());
         return smsSportMapper.selectBySport(smsSport);
     }
 
     @Override
     public SmsSportResult getUpdateInfo(Long id) {
         return sportDao.getUpdateInfo(id);
+    }
+
+    @Override
+    public int update(Long id, SmsSport smsSport) {
+        int count;
+        //更新信息
+        smsSport.setId(id);
+        smsSportMapper.updateByPrimaryKeySelective(smsSport);
+        count = 1;
+        return count;
+    }
+
+    @Override
+    public int updateRecommendStatus(List<Long> ids, Integer recommendStatus) {
+
+        return smsSportMapper.updateStatusByIds(recommendStatus,ids);
+    }
+
+    @Override
+    public int create(SmsSport smsSport) {
+        int count;
+        smsSport.setId(null);
+        smsSportMapper.insertSelective(smsSport);
+        count = 1;
+        return count;
+    }
+
+    @Override
+    public int updateDeleteStatus(List<Long> ids, Integer deleteStatus) {
+        return smsSportMapper.deleteByIds(ids);
     }
 }

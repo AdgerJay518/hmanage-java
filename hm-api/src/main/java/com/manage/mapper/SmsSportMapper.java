@@ -20,4 +20,12 @@ public interface SmsSportMapper {
     List<SmsSport> selectBySport(SmsSport smsSport);
 
     SmsSport selectByPrimaryKey(Long id);
+
+    int updateByPrimaryKeySelective(SmsSport smsSport);
+
+    int updateStatusByIds(Integer recommendStatus, List<Long> ids);
+
+    void insertSelective(SmsSport smsSport);
+
+    int deleteByIds(List<Long> ids);
 }

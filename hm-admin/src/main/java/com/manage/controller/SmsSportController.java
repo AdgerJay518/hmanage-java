@@ -44,4 +44,56 @@ public class SmsSportController {
         SmsSportResult sportResult = smsSportService.getUpdateInfo(id);
         return CommonResult.success(sportResult);
     }
+
+    @ApiOperation("更新")
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult update(@PathVariable Long id, @RequestBody SmsSport smsSport) {
+        int count = smsSportService.update(id, smsSport);
+        if (count > 0) {
+            return CommonResult.success(count);
+        } else {
+            return CommonResult.failed();
+        }
+    }
+
+    @ApiOperation("批量推荐")
+    @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateRecommendStatus(@RequestParam("ids") List<Long> ids,
+                                              @RequestParam("recommendStatus") Integer recommendStatus) {
+        int count = smsSportService.updateRecommendStatus(ids, recommendStatus);
+        if (count > 0) {
+            return CommonResult.success(count);
+        } else {
+            return CommonResult.failed();
+        }
+    }
+
+
+    @ApiOperation("创建")
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult create(@RequestBody SmsSport smsSport) {
+        int count = smsSportService.create(smsSport);
+        if (count > 0) {
+            return CommonResult.success(count);
+        } else {
+            return CommonResult.failed();
+        }
+    }
+
+    @ApiOperation("批量修改删除状态")
+    @RequestMapping(value = "/update/deleteStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateDeleteStatus(@RequestParam("ids") List<Long> ids,
+                                           @RequestParam("deleteStatus") Integer deleteStatus) {
+        int count = smsSportService.updateDeleteStatus(ids, deleteStatus);
+        System.out.println(deleteStatus);
+        if (count > 0) {
+            return CommonResult.success(count);
+        } else {
+            return CommonResult.failed();
+        }
+    }
 }

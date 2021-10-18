@@ -20,4 +20,12 @@ public interface SmsSportService {
     List<SmsSport> list(SmsSportQueryParam sportQueryParam, Integer pageSize, Integer pageNum);
 
     SmsSportResult getUpdateInfo(Long id);
+
+    int update(Long id, SmsSport smsSport);
+
+    int updateRecommendStatus(List<Long> ids, Integer recommendStatus);
+
+    int create(SmsSport smsSport);
+
+    int updateDeleteStatus(List<Long> ids, Integer deleteStatus);
 }

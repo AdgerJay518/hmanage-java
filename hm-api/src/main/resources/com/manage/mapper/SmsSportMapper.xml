@@ -128,4 +128,224 @@
         from sms_sport
         where sport_category_id = #{id,jdbcType=BIGINT}
     </select>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.manage.model.SmsSport">
+        update sms_sport
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="sportCategoryId != null">
+                sport_category_id = #{sportCategoryId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pic != null">
+                pic = #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="sportSn != null">
+                sport_sn = #{sportSn,jdbcType=VARCHAR},
+            </if>
+            <if test="recommandStatus != null">
+                recommand_status = #{recommandStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="sportCategoryName != null">
+                sport_category_name = #{sportCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="calorie != null">
+                calorie = #{calorie,jdbcType=INTEGER},
+            </if>
+            <if test="giftGrowth != null">
+                gift_growth = #{giftGrowth,jdbcType=INTEGER},
+            </if>
+            <if test="giftPoint != null">
+                gift_point = #{giftPoint,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null">
+                note = #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="albumPics != null">
+                album_pics = #{albumPics,jdbcType=VARCHAR},
+            </if>
+            <if test="detailTitle != null">
+                detail_title = #{detailTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="detailDesc != null">
+                detail_desc = #{detailDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="detailHtml != null">
+                detail_html = #{detailHtml,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="detailMobileHtml != null">
+                detail_mobile_html = #{detailMobileHtml,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateStatusByIds" parameterType="com.manage.model.SmsSport">
+        update sms_sport
+            <set>
+                <if test="recommendStatus != null">
+                    recommand_status = #{recommendStatus,jdbcType=INTEGER},
+                </if>
+            </set>
+        where id in
+        <foreach collection="ids" index="index" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </update>
+
+    <insert id="insertSelective" parameterType="com.manage.model.SmsSport">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sms_sport
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sportCategoryId != null">
+                sport_category_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="pic != null">
+                pic,
+            </if>
+            <if test="sportSn != null">
+                sport_sn,
+            </if>
+            <if test="recommandStatus != null">
+                recommand_status,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="sportCategoryName != null">
+                sport_category_name,
+            </if>
+            <if test="calorie != null">
+                calorie,
+            </if>
+            <if test="giftGrowth != null">
+                gift_growth,
+            </if>
+            <if test="giftPoint != null">
+                gift_point,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="keywords != null">
+                keywords,
+            </if>
+            <if test="note != null">
+                note,
+            </if>
+            <if test="albumPics != null">
+                album_pics,
+            </if>
+            <if test="detailTitle != null">
+                detail_title,
+            </if>
+            <if test="detailDesc != null">
+                detail_desc,
+            </if>
+            <if test="detailHtml != null">
+                detail_html,
+            </if>
+            <if test="detailMobileHtml != null">
+                detail_mobile_html,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="sportCategoryId != null">
+                #{sportCategoryId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pic != null">
+                #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="sportSn != null">
+                #{sportSn,jdbcType=VARCHAR},
+            </if>
+            <if test="recommandStatus != null">
+                #{recommandStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="sportCategoryName != null">
+                #{sportCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="calorie != null">
+                #{calorie,jdbcType=INTEGER},
+            </if>
+            <if test="giftGrowth != null">
+                #{giftGrowth,jdbcType=INTEGER},
+            </if>
+            <if test="giftPoint != null">
+                #{giftPoint,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null">
+                #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="albumPics != null">
+                #{albumPics,jdbcType=VARCHAR},
+            </if>
+            <if test="detailTitle != null">
+                #{detailTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="detailDesc != null">
+                #{detailDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="detailHtml != null">
+                #{detailHtml,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="detailMobileHtml != null">
+                #{detailMobileHtml,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByIds">
+        delete
+        from sms_sport
+        where id in
+        <foreach collection="ids" index="index" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>;
+    </delete>
 </mapper>
