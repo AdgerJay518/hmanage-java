@@ -70,4 +70,68 @@
         #{confirmTime,jdbcType=TIMESTAMP}
         )
     </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.manage.model.PmsOrder">
+        update pms_order
+            <set>
+                <if test="memberId != null">
+                    member_id = #{memberId,jdbcType=BIGINT},
+                </if>
+                <if test="planSn != null">
+                    plan_sn = #{planSn,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="memberUsername != null">
+                    member_username = #{memberUsername,jdbcType=VARCHAR},
+                </if>
+                <if test="totalCalorie != null">
+                    total_calorie = #{totalCalorie,jdbcType=DECIMAL},
+                </if>
+                <if test="totalTime != null">
+                    total_time = #{totalTime,jdbcType=DECIMAL},
+                </if>
+                <if test="sourceType != null">
+                    source_type = #{sourceType,jdbcType=INTEGER},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=INTEGER},
+                </if>
+                <if test="autoConfirmDay != null">
+                    auto_confirm_day = #{autoConfirmDay,jdbcType=INTEGER},
+                </if>
+                <if test="integration != null">
+                    integration = #{integration,jdbcType=INTEGER},
+                </if>
+                <if test="growth != null">
+                    growth = #{growth,jdbcType=INTEGER},
+                </if>
+                <if test="note != null">
+                    note = #{note,jdbcType=VARCHAR},
+                </if>
+                <if test="confirmStatus != null">
+                    confirm_status = #{confirmStatus,jdbcType=INTEGER},
+                </if>
+                <if test="deleteStatus != null">
+                    delete_status = #{deleteStatus,jdbcType=INTEGER},
+                </if>
+                <if test="startTime != null">
+                    start_time =#{startTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="confirmTime != null">
+                    confirm_time =#{confirmTime,jdbcType=TIMESTAMP}
+                </if>
+            </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByIds">
+        delete
+        from pms_order
+        where id in
+        <foreach collection="ids" index="index" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
 </mapper>

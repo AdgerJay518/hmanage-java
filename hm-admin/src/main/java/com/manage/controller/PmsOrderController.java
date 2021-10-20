@@ -41,4 +41,28 @@ public class PmsOrderController {
         PmsOrderDetail orderDetailResult = orderService.detail(id);
         return CommonResult.success(orderDetailResult);
     }
+
+    @ApiOperation("备注")
+    @RequestMapping(value = "/update/note", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateNote(@RequestParam("id") Long id,
+                                   @RequestParam("note") String note,
+                                   @RequestParam("status") Integer status) {
+        int count = orderService.updateNote(id, note, status);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("批量删除")
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult delete(@RequestParam("ids") List<Long> ids) {
+        int count = orderService.delete(ids);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
 }

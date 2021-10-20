@@ -10,4 +10,8 @@ public interface PmsOrderService {
     List<PmsOrder> list(PmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum);
 
     PmsOrderDetail detail(Long id);
+
+    int updateNote(Long id, String note, Integer status);
+
+    int delete(List<Long> ids);
 }

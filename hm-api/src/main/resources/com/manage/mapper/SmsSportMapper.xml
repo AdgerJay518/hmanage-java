@@ -346,6 +346,6 @@
         where id in
         <foreach collection="ids" index="index" item="ids" open="(" separator="," close=")">
             #{ids}
-        </foreach>;
+        </foreach>
     </delete>
 </mapper>

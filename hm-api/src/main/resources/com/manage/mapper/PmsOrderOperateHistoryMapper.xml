@@ -10,4 +10,14 @@
         <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
         <result column="note" jdbcType="VARCHAR" property="note" />
     </resultMap>
+
+    <insert id="insert" parameterType="com.manage.model.PmsOrderOperateHistory">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into Pms_order_operate_history (order_id, operate_man, create_time,
+        order_status, note)
+        values (#{orderId,jdbcType=BIGINT}, #{operateMan,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{orderStatus,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR})
+    </insert>
 </mapper>

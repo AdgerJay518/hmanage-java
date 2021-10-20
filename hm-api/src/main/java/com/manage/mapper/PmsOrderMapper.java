@@ -13,4 +13,8 @@ public interface PmsOrderMapper {
     List<Long>  getOrderId(PmsOrder pmsOrder);
 
     void insert(PmsOrder order);
+
+    int updateByPrimaryKeySelective(PmsOrder order);
+
+    int deleteByIds(List<Long> ids);
 }
