@@ -50,7 +50,7 @@ public class PmsOrder implements Serializable {
     @ApiModelProperty(value = "可以活动的成长值")
     private Integer growth;
 
-    @ApiModelProperty(value = "订单备注")
+    @ApiModelProperty(value = "备注")
     private String note;
 
     @ApiModelProperty(value = "确认收货状态：0->未确认；1->已确认")

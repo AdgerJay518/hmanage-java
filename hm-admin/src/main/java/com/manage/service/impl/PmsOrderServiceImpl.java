@@ -2,6 +2,7 @@ package com.manage.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.manage.dao.PmsOrderDao;
+import com.manage.dto.PmsOrderDetail;
 import com.manage.dto.PmsOrderQueryParam;
 import com.manage.model.PmsOrder;
 import com.manage.service.PmsOrderService;
@@ -25,5 +26,10 @@ public class PmsOrderServiceImpl implements PmsOrderService {
     public List<PmsOrder> list(PmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         return orderDao.getList(queryParam);
+    }
+
+    @Override
+    public PmsOrderDetail detail(Long id) {
+        return orderDao.getDetail(id);
     }
 }

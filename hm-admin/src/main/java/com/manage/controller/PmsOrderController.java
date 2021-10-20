@@ -2,6 +2,7 @@ package com.manage.controller;
 
 import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
+import com.manage.dto.PmsOrderDetail;
 import com.manage.dto.PmsOrderQueryParam;
 import com.manage.model.PmsOrder;
 import com.manage.service.PmsOrderService;
@@ -9,10 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +32,13 @@ public class PmsOrderController {
                                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsOrder> orderList = orderService.list(queryParam, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(orderList));
+    }
+
+    @ApiOperation("获取计划详情")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<PmsOrderDetail> detail(@PathVariable Long id) {
+        PmsOrderDetail orderDetailResult = orderService.detail(id);
+        return CommonResult.success(orderDetailResult);
     }
 }

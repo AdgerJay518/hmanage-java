@@ -26,4 +26,31 @@
             AND create_time LIKE concat(#{queryParam.createTime},"%")
         </if>
     </select>
+
+    <select id="getDetail" resultMap="orderDetailResultMap">
+        SELECT o.*,
+               oi.id item_id,
+               oi.sf_id item_sf_id,
+               oi.sf_sn item_sf_sn,
+               oi.sf_pic item_sf_pic,
+               oi.sf_name item_sf_name,
+               oi.sf_quantity item_sf_quantity,
+            oi.gift_growth item_gift_growth,
+            oi.gift_integration item_gift_integration,
+            oi.sf_calorie item_sf_calorie,
+            oi.order_sn item_order_sn,
+            oi.order_id item_order_id,
+               oh.id history_id,
+               oh.operate_man history_operate_man,
+               oh.create_time history_create_time,
+               oh.order_status history_order_status,
+               oh.note history_note
+        FROM
+                pms_order o
+                        LEFT JOIN pms_order_item oi ON o.id = oi.order_id
+                        LEFT JOIN pms_order_operate_history oh ON o.id = oh.order_id
+        WHERE
+                o.id = #{id}
+        ORDER BY oi.id ASC,oh.create_time DESC
+    </select>
 </mapper>
