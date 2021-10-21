@@ -9,12 +9,12 @@
     <sql id="Base_Column_List">
         id, admin_id, role_id
     </sql>
-    <select id="selectByRelation" parameterType="java.lang.Long" resultType="com.manage.model.UmsAdminRoleRelation">
+    <select id="selectByRelation" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from ums_admin_role_relation
         <if test="_parameter != null">
-            where id=#{id,jdbcType=BIGINT}
+            where role_id=#{id,jdbcType=BIGINT}
         </if>
     </select>
 </mapper>

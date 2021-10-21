@@ -70,7 +70,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     @Override
     public int delete(Long id) {
         int count = umsRoleMapper.deleteByPrimaryKey(id);
-        adminCacheService.delResourceListByRoleIds(id);
+        adminCacheService.delResourceListByRole(id);
         return count;
     }
 
@@ -109,7 +109,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
             umsRoleResourceRelation.setResourceId(resourceId);
             roleResourceRelationMapper.insert(umsRoleResourceRelation);
         }
-        adminCacheService.delResourceListByRoleIds(roleId);
+        adminCacheService.delResourceListByRole(roleId);
         return resourceIds.size();
     }
 }

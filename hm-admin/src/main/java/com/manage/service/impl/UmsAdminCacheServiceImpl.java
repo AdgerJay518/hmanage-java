@@ -78,7 +78,7 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     }
 
     @Override
-    public void delResourceListByRoleIds(Long id) {
+    public void delResourceListByRole(Long id) {
         List<UmsAdminRoleRelation> umsAdminRoleRelations = adminRoleRelationMapper.selectByRelation(id);
         if (CollUtil.isNotEmpty(umsAdminRoleRelations)) {
             String keyPrefix = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":";
@@ -96,4 +96,5 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
             redisService.del(keys);
         }
     }
+
 }
