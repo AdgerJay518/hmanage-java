@@ -186,5 +186,7 @@
         select
         <include refid="Base_Column_List" />
         from sms_sport_category
+        where show_status=1
+        order by sort
     </select>
 </mapper>

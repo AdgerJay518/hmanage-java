@@ -27,6 +27,8 @@
         select
         <include refid="Base_Column_List" />
         from fms_food_category
+        where show_status=1
+        order by sort
     </select>
 
     <select id="selectByParentId" resultMap="BaseResultMap">
