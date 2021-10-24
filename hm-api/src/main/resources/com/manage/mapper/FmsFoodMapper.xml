@@ -41,4 +41,64 @@
         where food_category_id = #{id,jdbcType=BIGINT}
     </select>
 
+    <update id="updateFood" parameterType="map">
+        update fms_food
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="foodCategoryId != null">
+                food_category_id = #{foodCategoryId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pic != null">
+                pic = #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="foodSn != null">
+                food_sn = #{foodSn,jdbcType=VARCHAR},
+            </if>
+            <if test="recommandStatus != null">
+                recommand_status = #{recommandStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="foodCategoryName != null">
+                food_category_name = #{foodCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="calorie != null">
+                calorie = #{calorie,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null">
+                note = #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="albumPics != null">
+                album_pics = #{albumPics,jdbcType=VARCHAR},
+            </if>
+            <if test="detailTitle != null">
+                detail_title = #{detailTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="detailDesc != null">
+                detail_desc = #{detailDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="detailHtml != null">
+                detail_html = #{detailHtml,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="detailMobileHtml != null">
+                detail_mobile_html = #{detailMobileHtml,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where food_category_id = #{foodCategoryId,jdbcType=BIGINT}
+    </update>
 </mapper>

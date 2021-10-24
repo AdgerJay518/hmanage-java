@@ -40,7 +40,6 @@ public class SmsSportCategoryController {
     @RequestMapping(value = "/update/navStatus/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateNavStatus(@PathVariable Long id, @RequestParam("navStatus") Integer navStatus) {
-        System.out.println(navStatus);
         int count = sportCategory.updateNavStatus(id, navStatus);
         if (count > 0) {
             return CommonResult.success(count);
