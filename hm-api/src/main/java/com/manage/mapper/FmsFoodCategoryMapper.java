@@ -22,4 +22,5 @@ public interface FmsFoodCategoryMapper {
     int insert(FmsFoodCategory foodCategory);
 
     int deleteById(Long id);
+
 }

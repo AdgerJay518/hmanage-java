@@ -2,8 +2,8 @@ package com.manage.controller;
 
 import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
+import com.manage.dto.FmsFoodCategoryWithChildren;
 import com.manage.model.FmsFoodCategory;
-import com.manage.model.SmsSportCategory;
 import com.manage.service.FmsFoodCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -107,11 +107,11 @@ public class FmsFoodCategoryController {
         }
     }
 
-//    @ApiOperation("查询所有分类及其子分类")
-//    @RequestMapping(value = "/list/withChildren", method = RequestMethod.GET)
-//    @ResponseBody
-//    public CommonResult<List<FmsFoodCategoryWithChildren>> listWithChildren() {
-//        List<FmsFoodCategoryWithChildren> list = foodCategory.listWithChildren();
-//        return CommonResult.success(list);
-//    }
+    @ApiOperation("查询所有分类及其子分类")
+    @RequestMapping(value = "/list/withChildren", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<FmsFoodCategoryWithChildren>> listWithChildren() {
+        List<FmsFoodCategoryWithChildren> list = foodCategory.listWithChildren();
+        return CommonResult.success(list);
+    }
 }

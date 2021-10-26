@@ -1,5 +1,6 @@
 package com.manage.service;
 
+import com.manage.dto.FmsFoodCategoryWithChildren;
 import com.manage.model.FmsFoodCategory;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface FmsFoodCategoryService {
     int create(FmsFoodCategory foodCategory);
 
     int delete(Long id);
+
+    List<FmsFoodCategoryWithChildren> listWithChildren();
 }

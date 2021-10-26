@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.dao.FmsFoodDao">
+    <resultMap id="updateInfoMap" type="com.manage.dto.FmsFoodResult" extends="com.manage.mapper.FmsFoodMapper.ResultMapWithBLOBs">
+        <result column="cateParentId" jdbcType="BIGINT" property="cateParentId" />
+    </resultMap>
+
+    <select id="getUpdateInfo" resultMap="updateInfoMap">
+        SELECT *,
+               pc.parent_id cateParentId
+        FROM fms_food p
+                     LEFT JOIN fms_food_category pc on pc.id = p.food_category_id
+        WHERE p.id=#{id};
+    </select>
+</mapper>

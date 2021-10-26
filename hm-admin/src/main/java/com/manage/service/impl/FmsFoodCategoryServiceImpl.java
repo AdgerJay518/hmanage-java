@@ -1,11 +1,12 @@
 package com.manage.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.manage.dao.FmsFoodCategoryDao;
+import com.manage.dto.FmsFoodCategoryWithChildren;
 import com.manage.mapper.FmsFoodCategoryMapper;
 import com.manage.mapper.FmsFoodMapper;
 import com.manage.model.FmsFood;
 import com.manage.model.FmsFoodCategory;
-import com.manage.model.SmsSportCategory;
 import com.manage.service.FmsFoodCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,9 @@ public class FmsFoodCategoryServiceImpl implements FmsFoodCategoryService {
 
     @Autowired
     private FmsFoodMapper fmsFoodMapper;
+
+    @Autowired
+    private FmsFoodCategoryDao fmsFoodCategoryDao;
 
     @Override
     public List<FmsFoodCategory> getList(Long parentId, Integer pageSize, Integer pageNum) {
@@ -72,6 +76,11 @@ public class FmsFoodCategoryServiceImpl implements FmsFoodCategoryService {
     @Override
     public int delete(Long id) {
         return foodCategoryMapper.deleteById(id);
+    }
+
+    @Override
+    public List<FmsFoodCategoryWithChildren> listWithChildren() {
+        return fmsFoodCategoryDao.listWithChildren();
     }
 
     /**
