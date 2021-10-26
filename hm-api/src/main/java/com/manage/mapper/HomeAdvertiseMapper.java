@@ -13,4 +13,5 @@ import java.util.List;
 public interface HomeAdvertiseMapper {
 
     List<HomeAdvertise> select(HomeAdvertise advertise);
+
 }

@@ -21,10 +21,27 @@
     note, sort
     </sql>
 
-    <select id="select" resultType="com.manage.model.HomeAdvertise">
+    <select id="select" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from home_advertise
+        <if test="_parameter != null">
+            <where>
+                <if test="name!=null">
+                    and name like #{name,jdbcType=VARCHAR}
+                </if>
+                <if test="type!=null">
+                    and type = #{type,jdbcType=INTEGER}
+                </if>
+                <if test="endTime!=null">
+                    and end_time <![CDATA[>=]]> #{startTime,jdbcType=TIMESTAMP}
+                </if>
+                <if test="endTime!=null">
+                    and end_time <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+                </if>
+            </where>
+        </if>
         order by sort desc
     </select>
+
 </mapper>
