@@ -14,4 +14,11 @@ public interface HomeAdvertiseMapper {
 
     List<HomeAdvertise> select(HomeAdvertise advertise);
 
+    HomeAdvertise selectByPrimaryKey(Long id);
+
+    int updateByPrimaryKeySelective(HomeAdvertise homeAdvertise);
+
+    int insert(HomeAdvertise advertise);
+
+    int deleteByIds(List<Long> ids);
 }

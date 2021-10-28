@@ -53,4 +53,34 @@ public class HomeAdvertiseServiceImpl implements HomeAdvertiseService {
         }
         return advertiseMapper.select(homeAdvertise);
     }
+
+    @Override
+    public HomeAdvertise getItem(Long id) {
+        return advertiseMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateStatus(Long id, Integer status) {
+        HomeAdvertise homeAdvertise = new HomeAdvertise();
+        homeAdvertise.setId(id);
+        homeAdvertise.setStatus(status);
+        return advertiseMapper.updateByPrimaryKeySelective(homeAdvertise);
+    }
+
+    @Override
+    public int create(HomeAdvertise advertise) {
+        advertise.setClickCount(0);
+        return advertiseMapper.insert(advertise);
+    }
+
+    @Override
+    public int delete(List<Long> ids) {
+        return advertiseMapper.deleteByIds(ids);
+    }
+
+    @Override
+    public int update(Long id, HomeAdvertise advertise) {
+        advertise.setId(id);
+        return advertiseMapper.updateByPrimaryKeySelective(advertise);
+    }
 }
