@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface CmsSubjectMapper {
     List<CmsSubject> select(CmsSubject cmsSubject);
+
+    List<CmsSubject> selectBySubject(CmsSubject cmsSubject);
 }

@@ -36,4 +36,17 @@
             and category_id=#{categoryId,jdbcType=BIGINT}
         </if>
     </select>
+
+    <select id="selectBySubject" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from cms_subject
+        <if test="_parameter!=null">
+            <where>
+                <if test="categoryName!=null">
+                    and category_name like #{categoryName,jdbcType=VARCHAR}
+                </if>
+            </where>
+        </if>
+    </select>
 </mapper>
