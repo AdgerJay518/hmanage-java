@@ -30,4 +30,12 @@ public class CmsSubjectCategoryServiceImpl implements CmsSubjectCategoryService 
         }
         return subjectCategoryMapper.selectBySubjectCategory(cmsSubjectCategory);
     }
+
+    @Override
+    public int updateRecommendStatus(List<Long> ids, Integer recommendStatus) {
+        CmsSubjectCategory cmsSubjectCategory = new CmsSubjectCategory();
+        cmsSubjectCategory.setShowStatus(recommendStatus);
+        return subjectCategoryMapper.updateByIds(ids,recommendStatus);
+    }
+
 }

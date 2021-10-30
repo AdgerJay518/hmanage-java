@@ -11,4 +11,7 @@ import java.util.List;
 @Mapper
 public interface CmsSubjectCategoryMapper {
     List<CmsSubjectCategory> selectBySubjectCategory(CmsSubjectCategory cmsSubjectCategory);
+
+
+    int updateByIds(List<Long> ids, Integer showStatus);
 }

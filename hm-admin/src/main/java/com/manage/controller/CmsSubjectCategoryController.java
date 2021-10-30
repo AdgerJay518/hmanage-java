@@ -8,10 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +31,17 @@ public class CmsSubjectCategoryController {
                                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<CmsSubjectCategory> subjectList = subjectCategoryService.list(subjectName, recommendStatus, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(subjectList));
+    }
+
+    @ApiOperation("批量修改推荐状态")
+    @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateRecommendStatus(@RequestParam("ids") List<Long> ids,
+                                              @RequestParam Integer recommendStatus) {
+        int count = subjectCategoryService.updateRecommendStatus(ids, recommendStatus);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
     }
 }

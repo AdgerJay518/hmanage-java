@@ -35,6 +35,9 @@
         <if test="categoryId != null">
             and category_id=#{categoryId,jdbcType=BIGINT}
         </if>
+                        <if test="showStatus!=null">
+                            and show_status=#{showStatus,jdbcType=INTEGER}
+                        </if>
     </select>
 
     <select id="selectBySubject" resultMap="BaseResultMap">
