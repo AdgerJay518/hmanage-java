@@ -52,4 +52,11 @@
             </where>
         </if>
     </select>
+
+    <select id="selectByCategoryId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from cms_subject
+        where category_id = #{categoryId,jdbcType=BIGINT}
+    </select>
 </mapper>

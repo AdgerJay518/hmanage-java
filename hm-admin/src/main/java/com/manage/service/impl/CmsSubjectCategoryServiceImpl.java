@@ -38,4 +38,12 @@ public class CmsSubjectCategoryServiceImpl implements CmsSubjectCategoryService 
         return subjectCategoryMapper.updateByIds(ids,recommendStatus);
     }
 
+    @Override
+    public int updateSort(Long id, Integer sort) {
+        CmsSubjectCategory cmsSubjectCategory = new CmsSubjectCategory();
+        cmsSubjectCategory.setId(id);
+        cmsSubjectCategory.setSort(sort);
+        return subjectCategoryMapper.updateByPrimaryKeySelective(cmsSubjectCategory);
+    }
+
 }

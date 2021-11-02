@@ -8,4 +8,6 @@ public interface CmsSubjectCategoryService {
     List<CmsSubjectCategory> list(String subjectName, Integer recommendStatus, Integer pageSize, Integer pageNum);
 
     int updateRecommendStatus(List<Long> ids, Integer recommendStatus);
+
+    int updateSort(Long id, Integer sort);
 }

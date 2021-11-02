@@ -14,4 +14,6 @@ public interface CmsSubjectCategoryMapper {
 
 
     int updateByIds(List<Long> ids, Integer showStatus);
+
+    int updateByPrimaryKeySelective(CmsSubjectCategory cmsSubjectCategory);
 }

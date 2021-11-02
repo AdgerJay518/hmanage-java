@@ -12,4 +12,6 @@ public interface UmsMemberMapper {
     List<UmsMember> getByUsername(String username);
 
     int update(UmsMember member);
+
+    List<UmsMember> selectAllMember(String username);
 }

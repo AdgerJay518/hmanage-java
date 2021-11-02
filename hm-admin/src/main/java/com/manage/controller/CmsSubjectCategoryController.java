@@ -44,4 +44,16 @@ public class CmsSubjectCategoryController {
         }
         return CommonResult.failed();
     }
+
+
+    @ApiOperation("修改推荐排序")
+    @RequestMapping(value = "/update/sort/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateSort(@PathVariable Long id, Integer sort) {
+        int count = subjectCategoryService.updateSort(id, sort);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
 }

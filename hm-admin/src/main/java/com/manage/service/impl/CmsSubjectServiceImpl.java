@@ -27,4 +27,12 @@ public class CmsSubjectServiceImpl implements CmsSubjectService {
         }
         return cmsSubjectMapper.selectBySubject(cmsSubject);
     }
+
+    @Override
+    public List<CmsSubject> listById(Integer pageSize, Integer pageNum, Long subjectId) {
+        PageHelper.startPage(pageNum,pageSize);
+        CmsSubject cmsSubject = new CmsSubject();
+        cmsSubject.setCategoryId(subjectId);
+        return cmsSubjectMapper.selectByCategoryId(cmsSubject);
+    }
 }

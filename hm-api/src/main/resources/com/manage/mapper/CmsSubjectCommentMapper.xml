@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.CmsSubjectCommentMapper">
+    <resultMap id="BaseResultMap" type="com.manage.model.CmsSubjectComment">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="subject_id" jdbcType="BIGINT" property="subjectId" />
+        <result column="member_nick_name" jdbcType="VARCHAR" property="memberNickName" />
+        <result column="member_icon" jdbcType="VARCHAR" property="memberIcon" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="show_status" jdbcType="INTEGER" property="showStatus" />
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.manage.model.CmsSubjectComment">
+        <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, subject_id, member_nick_name, member_icon, create_time, show_status, content
+    </sql>
+
+    <select id="selectBySubjectId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from cms_subject_comment
+        where subject_id=#{subjectId,jdbcType=BIGINT}
+    </select>
+</mapper>
