@@ -14,4 +14,6 @@ public interface UmsMemberMapper {
     int update(UmsMember member);
 
     List<UmsMember> selectAllMember(String username);
+
+    int delete(Long id);
 }

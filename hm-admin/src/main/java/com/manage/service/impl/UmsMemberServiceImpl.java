@@ -27,4 +27,15 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         }
         return memberMapper.selectAllMember(umsMember.getUsername());
     }
+
+    @Override
+    public int updateStatus(Long id, UmsMember umsMember) {
+        umsMember.setId(id);
+        return memberMapper.update(umsMember);
+    }
+
+    @Override
+    public int delete(Long id) {
+        return memberMapper.delete(id);
+    }
 }

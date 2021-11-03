@@ -84,4 +84,9 @@
             where username like #{username,jdbcType=VARCHAR}
         </if>
     </select>
+
+    <delete id="delete">
+        delete from ums_member
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>

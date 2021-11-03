@@ -9,10 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +31,30 @@ public class UmsMemberController {
                                                     @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum){
         List<UmsMember> list = memberService.list(keyword, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(list));
+    }
+
+    @ApiOperation("修改帐号状态")
+    @RequestMapping(value = "/updateStatus/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateStatus(@PathVariable Long id
+            ,@RequestParam(value = "status") Integer status ){
+        UmsMember umsMember = new UmsMember();
+        umsMember.setStatus(status);
+        int update = memberService.updateStatus(id, umsMember);
+        if (update>0){
+            return CommonResult.success(update);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("注销用户信息")
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public  CommonResult delete(@PathVariable Long id){
+        int delete = memberService.delete(id);
+        if (delete>0){
+            return CommonResult.success(delete);
+        }
+        return CommonResult.failed();
     }
 }
