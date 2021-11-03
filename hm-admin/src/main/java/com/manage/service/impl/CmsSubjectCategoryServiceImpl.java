@@ -2,6 +2,8 @@ package com.manage.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.manage.mapper.CmsSubjectCategoryMapper;
+import com.manage.mapper.CmsSubjectMapper;
+import com.manage.model.CmsSubject;
 import com.manage.model.CmsSubjectCategory;
 import com.manage.service.CmsSubjectCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ import java.util.List;
 public class CmsSubjectCategoryServiceImpl implements CmsSubjectCategoryService {
     @Autowired
     private CmsSubjectCategoryMapper subjectCategoryMapper;
+
+    @Autowired
+    private CmsSubjectMapper cmsSubjectMapper;
 
     @Override
     public List<CmsSubjectCategory> list(String subjectName, Integer recommendStatus, Integer pageSize, Integer pageNum) {
@@ -44,6 +49,35 @@ public class CmsSubjectCategoryServiceImpl implements CmsSubjectCategoryService 
         cmsSubjectCategory.setId(id);
         cmsSubjectCategory.setSort(sort);
         return subjectCategoryMapper.updateByPrimaryKeySelective(cmsSubjectCategory);
+    }
+
+    @Override
+    public CmsSubjectCategory getItem(Long id) {
+        return subjectCategoryMapper.selectById(id);
+    }
+
+    @Override
+    public int create(CmsSubjectCategory cmsSubjectCategory) {
+        cmsSubjectCategory.setSubjectCount(0);
+        return subjectCategoryMapper.insert(cmsSubjectCategory);
+    }
+
+    @Override
+    public int update(Long id, CmsSubjectCategory cmsSubjectCategory) {
+        cmsSubjectCategory.setId(id);
+        //专题更新时需要更新相应主题对应的专题名称
+        CmsSubject cmsSubject = new CmsSubject();
+        cmsSubject.setCategoryName(cmsSubjectCategory.getName());
+        cmsSubject.setCategoryId(cmsSubjectCategory.getId());
+        cmsSubjectMapper.update(cmsSubject);
+        return subjectCategoryMapper.update(cmsSubjectCategory);
+    }
+
+    @Override
+    public int deleteIds(List<Long> ids) {
+        //专题背删除的同时，专题下的主题都会被删除
+        cmsSubjectMapper.deleteByCateIds(ids);
+        return subjectCategoryMapper.deleteByIds(ids);
     }
 
 }

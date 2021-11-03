@@ -89,7 +89,6 @@ public class SmsSportController {
     public CommonResult updateDeleteStatus(@RequestParam("ids") List<Long> ids,
                                            @RequestParam("deleteStatus") Integer deleteStatus) {
         int count = smsSportService.updateDeleteStatus(ids, deleteStatus);
-        System.out.println(deleteStatus);
         if (count > 0) {
             return CommonResult.success(count);
         } else {

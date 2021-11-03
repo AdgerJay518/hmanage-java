@@ -13,4 +13,8 @@ public interface CmsSubjectMapper {
     List<CmsSubject> selectBySubject(CmsSubject cmsSubject);
 
     List<CmsSubject> selectByCategoryId(CmsSubject cmsSubject);
+
+    void update(CmsSubject cmsSubject);
+
+    void deleteByCateIds(List<Long> ids);
 }

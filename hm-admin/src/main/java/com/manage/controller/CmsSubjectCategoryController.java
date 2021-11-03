@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,5 +56,52 @@ public class CmsSubjectCategoryController {
             return CommonResult.success(count);
         }
         return CommonResult.failed();
+    }
+
+    @ApiOperation("批量删除")
+    @RequestMapping(value = "/home/subject/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateDeleteStatus(@RequestParam("ids") List<Long> ids) {
+        int count = subjectCategoryService.deleteIds(ids);
+        if (count > 0) {
+            return CommonResult.success(count);
+        } else {
+            return CommonResult.failed();
+        }
+    }
+
+
+    @ApiOperation("根据id获取主题")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CmsSubjectCategory> getItem(@PathVariable Long id) {
+        CmsSubjectCategory cmsSubjectCategory = subjectCategoryService.getItem(id);
+        return CommonResult.success(cmsSubjectCategory);
+    }
+
+    @ApiOperation("添加主题")
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult create(@Validated @RequestBody CmsSubjectCategory cmsSubjectCategory) {
+        int count = subjectCategoryService.create(cmsSubjectCategory);
+        if (count > 0) {
+            return CommonResult.success(count);
+        } else {
+            return CommonResult.failed();
+        }
+    }
+
+    @ApiOperation("编辑专题")
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult update(@PathVariable Long id,
+                               @Validated
+                               @RequestBody CmsSubjectCategory cmsSubjectCategory) {
+        int count = subjectCategoryService.update(id, cmsSubjectCategory);
+        if (count > 0) {
+            return CommonResult.success(count);
+        } else {
+            return CommonResult.failed();
+        }
     }
 }

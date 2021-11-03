@@ -59,4 +59,61 @@
         from cms_subject
         where category_id = #{categoryId,jdbcType=BIGINT}
     </select>
+
+    <update id="update" parameterType="map">
+        update cms_subject
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="pic != null">
+                pic = #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="recommendStatus != null">
+                recommend_status = #{recommendStatus,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time, = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="collectCount != null">
+                collect_count = #{collectCount,jdbcType=INTEGER},
+            </if>
+            <if test="readCount != null">
+                read_count = #{readCount,jdbcType=INTEGER},
+            </if>
+            <if test="commentCount != null">
+                comment_count = #{commentCount,jdbcType=INTEGER},
+            </if>
+            <if test="albumPics != null">
+                album_pics = #{albumPics,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="showStatus != null">
+                show_status = #{showStatus,jdbcType=INTEGER},
+            </if>
+            <if test="forwardCount != null">
+                forward_count = #{forwardCount,jdbcType=INTEGER},
+            </if>
+            <if test="categoryName != null">
+                category_name = #{categoryName,jdbcType=VARCHAR},
+            </if>
+            </set>
+        where category_id = #{categoryId,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByCateIds">
+        delete from cms_subject
+        where cms_subject.category_id in
+        <foreach collection="ids" index="index" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
 </mapper>
