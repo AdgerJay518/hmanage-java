@@ -85,8 +85,22 @@ public class CmsSubjectServiceImpl implements CmsSubjectService {
 
     @Override
     public int update(Long id, CmsSubject cmsSubject) {
-        CmsSubject subject = new CmsSubject();
-        subject.setId(id);
+        if (!id.equals(cmsSubject.getCategoryId())){
+            //先减去更新前的转出专题的count
+            int preCount = getSubjectCountByCategoryId(id);
+            preCount-=1;
+            CmsSubjectCategory cmsSubjectCategory = new CmsSubjectCategory();
+            cmsSubjectCategory.setId(id);
+            cmsSubjectCategory.setSubjectCount(preCount);
+            cmsSubjectCategoryMapper.update(cmsSubjectCategory);
+
+            //再加上更新后转移到的专题的count
+            int curCount = getSubjectCountByCategoryId(cmsSubject.getCategoryId());
+            curCount+=1;
+            cmsSubjectCategory.setId(cmsSubject.getCategoryId());
+            cmsSubjectCategory.setSubjectCount(curCount);
+            cmsSubjectCategoryMapper.update(cmsSubjectCategory);
+        }
         return cmsSubjectMapper.updateById(cmsSubject);
     }
 
