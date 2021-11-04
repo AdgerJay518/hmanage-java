@@ -145,4 +145,17 @@
             #{ids}
         </foreach>
     </delete>
+
+    <select id="getName" resultType="java.lang.String">
+        select name
+        from cms_subject_category
+        where id=#{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="getSubjectCount" resultType="int">
+        select subject_count
+        from cms_subject_category
+        where id=#{id,jdbcType=BIGINT}
+    </select>
+
 </mapper>

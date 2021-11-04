@@ -17,4 +17,14 @@ public interface CmsSubjectMapper {
     void update(CmsSubject cmsSubject);
 
     void deleteByCateIds(List<Long> ids);
+
+    CmsSubject selectById(Long id);
+
+    int insert(CmsSubject subject);
+
+    int delete(long id);
+
+    int updateById(CmsSubject cmsSubject);
+
+    Long getCategoryId(Long id);
 }

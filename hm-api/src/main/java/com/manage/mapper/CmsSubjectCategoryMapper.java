@@ -25,4 +25,10 @@ public interface CmsSubjectCategoryMapper {
     int update(CmsSubjectCategory cmsSubjectCategory);
 
     int deleteByIds(List<Long> ids);
+
+
+    String getName(Long id);
+
+    int getSubjectCount(Long id);
+
 }

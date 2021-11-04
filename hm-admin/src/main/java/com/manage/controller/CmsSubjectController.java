@@ -3,11 +3,14 @@ package com.manage.controller;
 import com.manage.common.api.CommonPage;
 import com.manage.common.api.CommonResult;
 import com.manage.model.CmsSubject;
+import com.manage.model.CmsSubjectCategory;
+import com.manage.model.SmsSportCategory;
 import com.manage.service.CmsSubjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,5 +45,50 @@ public class CmsSubjectController {
     ){
         List<CmsSubject> subjectList = subjectService.listById(pageSize, pageNum,subjectId);
         return CommonResult.success(CommonPage.restPage(subjectList));
+    }
+
+    @ApiOperation("根据id获取主题")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CmsSubject> getItem(@PathVariable Long id) {
+        CmsSubject cmsSubject = subjectService.getItem(id);
+        return CommonResult.success(cmsSubject);
+    }
+
+    @ApiOperation("添加主题")
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult create(@Validated @RequestBody CmsSubject cmsSubject) {
+        int count = subjectService.create(cmsSubject);
+        if (count > 0) {
+            return CommonResult.success(count);
+        } else {
+            return CommonResult.failed();
+        }
+    }
+
+    @ApiOperation("删除")
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult delete(@RequestParam("id") long id) {
+        int count = subjectService.deleteId(id);
+        if (count > 0) {
+            return CommonResult.success(count);
+        } else {
+            return CommonResult.failed();
+        }
+    }
+
+    @ApiOperation("编辑主题")
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult update(@PathVariable Long id,
+                               @Validated @RequestBody CmsSubject cmsSubject) {
+        int count = subjectService.update(id, cmsSubject);
+        if (count > 0) {
+            return CommonResult.success(count);
+        } else {
+            return CommonResult.failed();
+        }
     }
 }
