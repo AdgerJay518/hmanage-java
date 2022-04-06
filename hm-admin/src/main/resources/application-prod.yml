@@ -14,7 +14,13 @@ spring:
     database: 0
     port: 6379
     password:
-    timeout: 300ms
+    timeout: 30s
+#    jedis:
+#      pool:
+#        min-idle: 10
+#        max-idle: 20
+#        max-wait: -1ms
+#        max-active: 200
 
 jwt:
   tokenHeader: Authorization

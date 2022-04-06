@@ -14,7 +14,7 @@ spring:
     database: 0
     port: 6379
     password:
-    timeout: 300ms
+    timeout: 30s
     key:
       authCode: 'ums:authCode'
       orderId: 'oms:orderId'

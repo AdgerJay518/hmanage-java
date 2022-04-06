@@ -21,4 +21,6 @@ public interface HomeAdvertiseMapper {
     int insert(HomeAdvertise advertise);
 
     int deleteByIds(List<Long> ids);
+
+    List<HomeAdvertise> selectAdvertise(HomeAdvertise advertise);
 }

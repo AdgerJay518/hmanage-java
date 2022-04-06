@@ -110,4 +110,12 @@
             #{ids}
         </foreach>
     </delete>
+
+    <select id="selectAdvertise" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from home_advertise
+        where status=1
+        order by sort desc
+    </select>
 </mapper>

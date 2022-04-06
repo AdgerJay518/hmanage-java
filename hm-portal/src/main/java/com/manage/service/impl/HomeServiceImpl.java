@@ -44,6 +44,6 @@ public class HomeServiceImpl implements HomeService {
     }
 
     private List<HomeAdvertise> getHomeAdvertiseList(){
-        return advertiseMapper.select(new HomeAdvertise());
+        return advertiseMapper.selectAdvertise(new HomeAdvertise());
     }
 }

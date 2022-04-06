@@ -3,6 +3,8 @@ package com.manage.controller;
 import com.manage.common.api.CommonResult;
 import com.manage.dto.UmsMemberLoginParam;
 import com.manage.model.UmsMember;
+import com.manage.model.UmsMemberExtends;
+import com.manage.service.UmsMemberExtendsService;
 import com.manage.service.UmsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,6 +31,11 @@ public class UmsMemberController {
     @Autowired
     private UmsMemberService memberService;
 
+    @Autowired
+    private UmsMemberExtendsService umsMemberExtendsService;
+
+    private boolean flag=false;
+
     @ApiOperation("登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
@@ -53,7 +60,20 @@ public class UmsMemberController {
             return CommonResult.unauthorized(null);
         }
         UmsMember member = memberService.getCurrentMember();
+        flag=true;
         return CommonResult.success(member);
+    }
+
+    @ApiOperation("获取更多用户信息")
+    @RequestMapping(value = "/ExtendsInfo", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult info(Long id){
+        if (!flag){
+            return CommonResult.unauthorized(null);
+        }
+        UmsMemberExtends umsMemberExtends=umsMemberExtendsService.getExtendsInfo(id);
+        System.out.println(umsMemberExtends);
+        return CommonResult.success(umsMemberExtends);
     }
 
     @ApiOperation("修改用户信息")
@@ -65,6 +85,25 @@ public class UmsMemberController {
             return CommonResult.success(count);
         }
         return CommonResult.failed();
+    }
+
+    @ApiOperation("修改用户扩展信息")
+    @RequestMapping(value = "/updateExtends", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateExtends(@RequestBody UmsMemberExtends umsMemberExtends) {
+        int count = umsMemberExtendsService.update(umsMemberExtends);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("根据身高体重判断健康状况")
+    @RequestMapping(value = "/healthLevel", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult healthLevel(@RequestParam (value = "height") String height,@RequestParam (value = "weight") String weight) {
+        String healthLevel = umsMemberExtendsService.calculate(height,weight);
+        return CommonResult.success(healthLevel);
     }
 
     @ApiOperation(value = "登出功能")

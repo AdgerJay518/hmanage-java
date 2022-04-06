@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.UmsMemberExtendsMapper">
+    <resultMap id="BaseResultMap" type="com.manage.model.UmsMemberExtends">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="member_id" jdbcType="BIGINT" property="memberId" />
+        <result column="weight" jdbcType="VARCHAR" property="weight" />
+        <result column="height" jdbcType="VARCHAR" property="height" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, member_id, height, weight
+    </sql>
+
+    <select id="getExtendsInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ums_member_extends where member_id=#{id}
+    </select>
+
+    <update id="update" parameterType="com.manage.model.UmsMemberExtends">
+        update ums_member_extends
+            <set>
+                <if test="height != null">
+                    height = #{height,jdbcType=VARCHAR},
+                </if>
+                <if test="weight != null">
+                    weight = #{weight,jdbcType=VARCHAR},
+                </if>
+            </set>
+        where member_id=#{memberId,jdbcType=BIGINT}
+    </update>
+</mapper>

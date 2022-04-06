@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -91,8 +92,17 @@ public class PlanItemServiceImpl implements PlanItemService {
      */
     private PlanItem getPlanItem(PlanItem planItem){
         PlanItem plan= new PlanItem();
+        Integer sf = planItem.getSf();
+        Long sfId = planItem.getSfId();
+        if (sf==2){
+            BigDecimal calorie = planItem.getCalorie();
+            BigDecimal bigNum = new BigDecimal("-1");
+            calorie=calorie.multiply(bigNum);
+            planItem.setCalorie(calorie);
+            sfId+=10000L;
+        }
         plan.setMemberId(planItem.getMemberId());
-        plan.setSfId(planItem.getSfId());
+        plan.setSfId(sfId);
         List<PlanItem> itemList = planItemMapper.selectByPlan(plan);
         if (!CollectionUtils.isEmpty(itemList)) {
             return itemList.get(0);

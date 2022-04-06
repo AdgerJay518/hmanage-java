@@ -20,6 +20,9 @@ public class PlanItem implements Serializable {
 
     private Long memberId;
 
+    @ApiModelProperty(value = "判断是运动还是食品")
+    private Integer sf;
+
     @ApiModelProperty(value = "数量")
     private Integer quantity;
 

@@ -31,6 +31,7 @@ public class PlanItemController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult add(@RequestBody PlanItem planItem) {
+        System.out.println(planItem);
         int count = planItemService.add(planItem);
         if (count > 0) {
             return CommonResult.success(count);
