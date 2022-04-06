@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hmanage?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://47.98.241.91:3306/hmanage?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: root
   security:
@@ -10,10 +10,10 @@ spring:
       name: user
       password: 123456
   redis:
-    host: localhost
+    host: 47.98.241.91
     database: 0
     port: 6379
-    password:
+    password: 123456
     timeout: 30s
 #    jedis:
 #      pool:
