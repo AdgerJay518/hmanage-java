@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.dao.PortalOrderDao">
+
+    <resultMap id="BaseResultMap" type="com.manage.dto.manageParam">
+        <result column="total_calorie" jdbcType="DECIMAL" property="totalCalorie" />
+    </resultMap>
+
+    <select id="getCalorie" parameterType="String" resultMap="BaseResultMap">
+        select total_calorie
+        from pms_order
+        where create_time <![CDATA[>=]]> #{startTime,jdbcType=TIMESTAMP}
+        and create_time <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+    </select>
+</mapper>

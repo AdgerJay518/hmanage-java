@@ -5,10 +5,11 @@ import cn.hutool.core.collection.CollUtil;
 import com.github.pagehelper.PageHelper;
 import com.manage.common.api.CommonPage;
 import com.manage.common.service.RedisService;
+import com.manage.dao.PortalOrderDao;
 import com.manage.dao.PortalOrderItemDao;
-import com.manage.domin.PlanItemList;
 import com.manage.domin.PmsOrderDetail;
 import com.manage.dto.OrderParam;
+import com.manage.dto.manageParam;
 import com.manage.mapper.PmsOrderItemMapper;
 import com.manage.mapper.PmsOrderMapper;
 import com.manage.model.*;
@@ -42,6 +43,9 @@ public class PmsPortalOrderServiceImpl implements PmsPortalOrderService {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private PortalOrderDao orderDao;
 
     @Value("${redis.key.orderId}")
     private String REDIS_KEY_ORDER_ID;
@@ -140,6 +144,14 @@ public class PmsPortalOrderServiceImpl implements PmsPortalOrderService {
         UmsMember currentMember = memberService.getCurrentMember();
 
         return planItemService.getItemList(currentMember.getId(),orderParam.getPlanIds());
+    }
+
+    @Override
+    public List<manageParam> selectCalorieByDate(String date) {
+        String startTime=date+" "+"00:00:00";
+        String endTime=date+" "+"24:59:59";
+        List<manageParam> calorie = orderDao.getCalorie(startTime,endTime);
+        return calorie;
     }
 
 

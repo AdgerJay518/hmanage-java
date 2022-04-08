@@ -4,8 +4,10 @@ import com.manage.common.api.CommonPage;
 import com.manage.domin.PlanItemList;
 import com.manage.domin.PmsOrderDetail;
 import com.manage.dto.OrderParam;
+import com.manage.dto.manageParam;
 import com.manage.model.PlanItem;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,4 +17,6 @@ public interface PmsPortalOrderService {
     Map<String, Object> generateOrder(OrderParam orderParam);
 
     List<PlanItem> test(OrderParam orderParam);
+
+    List<manageParam> selectCalorieByDate(String date);
 }

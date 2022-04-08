@@ -17,4 +17,5 @@ public interface PmsOrderMapper {
     int updateByPrimaryKeySelective(PmsOrder order);
 
     int deleteByIds(List<Long> ids);
+
 }

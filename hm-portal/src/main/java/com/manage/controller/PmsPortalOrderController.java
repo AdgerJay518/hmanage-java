@@ -5,6 +5,7 @@ import com.manage.common.api.CommonResult;
 import com.manage.domin.PlanItemList;
 import com.manage.domin.PmsOrderDetail;
 import com.manage.dto.OrderParam;
+import com.manage.dto.manageParam;
 import com.manage.model.PlanItem;
 import com.manage.service.PmsPortalOrderService;
 import io.swagger.annotations.Api;
@@ -14,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -60,5 +64,18 @@ public class PmsPortalOrderController {
         //System.out.println(orderParam);
         List<PlanItem> test = pmsPortalOrderService.test(orderParam);
         return CommonResult.success(null, "成功");
+    }
+
+    @ApiOperation("根据日期查询消耗或摄取的卡路里")
+    @RequestMapping(value = "/manage", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<manageParam>> manage(@RequestParam String date) throws Exception {
+//        SimpleDateFormat fd = new SimpleDateFormat("yyyy-MM-dd");
+//        String nDate=date+"%";
+//        Date utilDate  = fd.parse(nDate);
+//        Date newDate = new java.sql.Date(utilDate.getTime());
+        List<manageParam> manage=pmsPortalOrderService.selectCalorieByDate(date);
+        System.out.println(manage);
+        return CommonResult.success(manage);
     }
 }
