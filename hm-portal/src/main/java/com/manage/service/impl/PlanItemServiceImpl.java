@@ -92,17 +92,8 @@ public class PlanItemServiceImpl implements PlanItemService {
      */
     private PlanItem getPlanItem(PlanItem planItem){
         PlanItem plan= new PlanItem();
-        Integer sf = planItem.getSf();
-        Long sfId = planItem.getSfId();
-        if (sf==2){
-            BigDecimal calorie = planItem.getCalorie();
-            BigDecimal bigNum = new BigDecimal("-1");
-            calorie=calorie.multiply(bigNum);
-            planItem.setCalorie(calorie);
-            sfId+=10000L;
-        }
         plan.setMemberId(planItem.getMemberId());
-        plan.setSfId(sfId);
+        plan.setSfId(planItem.getSfId());
         List<PlanItem> itemList = planItemMapper.selectByPlan(plan);
         if (!CollectionUtils.isEmpty(itemList)) {
             return itemList.get(0);
