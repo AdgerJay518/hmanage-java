@@ -151,6 +151,19 @@ public class PmsPortalOrderServiceImpl implements PmsPortalOrderService {
         String startTime=date+" "+"00:00:00";
         String endTime=date+" "+"24:59:59";
         List<manageParam> calorie = orderDao.getCalorie(startTime,endTime);
+        List<manageParam> calorieFood = orderDao.getCalorieFood(startTime,endTime);
+        int calorieSize = calorie.size();
+        int calorieFoodSize = calorieFood.size();
+        if (calorieSize>calorieFoodSize){
+            calorie.addAll(calorieFood);
+            return calorie;
+        }
+        if (calorieSize<calorieFoodSize){
+            calorieFood.addAll(calorie);
+            return calorieFood;
+        }
+
+        calorie.addAll(calorieFood);
         return calorie;
     }
 

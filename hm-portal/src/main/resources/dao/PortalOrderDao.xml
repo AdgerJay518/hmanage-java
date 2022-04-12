@@ -6,10 +6,22 @@
         <result column="total_calorie" jdbcType="DECIMAL" property="totalCalorie" />
     </resultMap>
 
+    <resultMap id="BaseResultMap2" type="com.manage.dto.manageParam">
+        <result column="ingestion_calorie" jdbcType="DECIMAL" property="ingestionCalorie" />
+    </resultMap>
+
     <select id="getCalorie" parameterType="String" resultMap="BaseResultMap">
         select total_calorie
         from pms_order
         where create_time <![CDATA[>=]]> #{startTime,jdbcType=TIMESTAMP}
         and create_time <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
     </select>
+
+    <select id="getCalorieFood" parameterType="String" resultMap="BaseResultMap2">
+        select ingestion_calorie
+        from pms_order_food
+        where create_time <![CDATA[>=]]> #{startTime,jdbcType=TIMESTAMP}
+          and create_time <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+    </select>
+
 </mapper>

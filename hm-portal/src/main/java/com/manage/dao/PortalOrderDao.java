@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface PortalOrderDao {
     List<manageParam> getCalorie(String startTime,String endTime);
+
+    List<manageParam> getCalorieFood(String startTime,String endTime);
 }
