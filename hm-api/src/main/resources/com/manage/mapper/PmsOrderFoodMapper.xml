@@ -57,4 +57,18 @@
         )
     </insert>
 
+    <select id="selectByPmsOrder" resultType="com.manage.model.PmsOrder" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pms_order_food
+        where member_id=#{memberId,jdbcType=BIGINT}
+        order by create_time
+    </select>
+
+    <select id="getOrderId" resultType="java.lang.Long">
+        select id
+        from pms_order_food
+        where member_id=#{memberId,jdbcType=BIGINT}
+    </select>
+
 </mapper>
