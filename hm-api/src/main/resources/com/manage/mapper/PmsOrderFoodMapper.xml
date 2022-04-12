@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.PmsOrderFoodMapper">
+
+    <resultMap id="BaseResultMap" type="com.manage.model.PmsOrderFood">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="member_id" jdbcType="BIGINT" property="memberId" />
+        <result column="plan_sn" jdbcType="VARCHAR" property="planSn" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="member_username" jdbcType="VARCHAR" property="memberUsername" />
+        <result column="ingestion_calorie" jdbcType="DECIMAL" property="ingestionCalorie" />
+        <result column="total_K" jdbcType="DECIMAL" property="totalK" />
+        <result column="source_type" jdbcType="INTEGER" property="sourceType" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="auto_confirm_day" jdbcType="INTEGER" property="autoConfirmDay" />
+        <result column="integration" jdbcType="INTEGER" property="integration" />
+        <result column="growth" jdbcType="INTEGER" property="growth" />
+        <result column="note" jdbcType="VARCHAR" property="note" />
+        <result column="confirm_status" jdbcType="INTEGER" property="confirmStatus" />
+        <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+        <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, member_id, plan_sn, create_time, member_username, ingestion_calorie,
+        total_k,source_type, status, auto_confirm_day,integration, growth,note,
+        confirm_status, delete_status,start_time, confirm_time
+    </sql>
+
+    <insert id="insert" parameterType="com.manage.model.PmsOrderFood">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        insert into pms_order_food (member_id, plan_sn,
+        create_time, member_username, ingestion_calorie,total_k,
+        source_type, status, auto_confirm_day, integration, growth,
+        note, confirm_status,delete_status, start_time, confirm_time)
+        values (
+        #{memberId,jdbcType=BIGINT},
+        #{planSn,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},
+        #{memberUsername,jdbcType=VARCHAR},
+        #{ingestionCalorie,jdbcType=DECIMAL},
+        #{totalK,jdbcType=DECIMAL},
+        #{sourceType,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER},
+        #{autoConfirmDay,jdbcType=INTEGER},
+        #{integration,jdbcType=INTEGER},
+        #{growth,jdbcType=INTEGER},
+        #{note,jdbcType=VARCHAR},
+        #{confirmStatus,jdbcType=INTEGER},
+        #{deleteStatus,jdbcType=INTEGER},
+        #{startTime,jdbcType=TIMESTAMP},
+        #{confirmTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+</mapper>

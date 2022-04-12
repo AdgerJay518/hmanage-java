@@ -12,4 +12,8 @@ public interface PlanItemFoodService {
     int updateQuantity(Long id, Long id1, Integer quantity);
 
     int delete(Long id, Long id1);
+
+    List<PlanItemFood> getItemFoodList(Long memberId, List<Long> planIds);
+
+    int deletes(Long id, List<Long> planIds);
 }

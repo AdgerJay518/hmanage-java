@@ -63,6 +63,16 @@ public class planItemFoodServiceImpl implements PlanItemFoodService {
         return planItemFoodMapper.deleteByPlan(planItemFood);
     }
 
+    @Override
+    public List<PlanItemFood> getItemFoodList(Long memberId, List<Long> planIds) {
+        return planItemFoodMapper.selectByPlanIds(memberId, planIds);
+    }
+
+    @Override
+    public int deletes(Long id, List<Long> planIds) {
+        return planItemFoodMapper.deleteByIds(id,planIds);
+    }
+
     private PlanItemFood getPlanItem(PlanItemFood planItemFood){
         PlanItemFood planItem = new PlanItemFood();
         planItem.setMemberId(planItemFood.getMemberId());

@@ -18,4 +18,8 @@ public interface PlanItemFoodMapper {
     int updateBySfAndMemberId(PlanItemFood planItemFood);
 
     int deleteByPlan(PlanItemFood planItemFood);
+
+    List<PlanItemFood> selectByPlanIds(Long memberId, List<Long> planIds);
+
+    int deleteByIds(Long memberId, List<Long> planIds);
 }

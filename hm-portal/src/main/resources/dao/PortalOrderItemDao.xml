@@ -3,7 +3,7 @@
 <mapper namespace="com.manage.dao.PortalOrderItemDao">
 
     <insert id="insertList" parameterType="java.util.List">
-        insert into Pms_order_item
+        insert into pms_order_item
         (order_id,order_sn,sf_id,sf_pic,sf_name,sf_sn,sf_calorie,sf_quantity,sf_category_id)
         values
         <foreach collection="orderItem" item="items" separator=",">

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.PmsOrderFoodItemMapper">
+
+    <resultMap id="BaseResultMap" type="com.manage.model.PmsOrderFoodItem">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="order_id" jdbcType="BIGINT" property="orderId" />
+        <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+        <result column="food_id" jdbcType="BIGINT" property="foodId" />
+        <result column="food_pic" jdbcType="VARCHAR" property="foodPic" />
+        <result column="food_name" jdbcType="VARCHAR" property="foodName" />
+        <result column="food_sn" jdbcType="VARCHAR" property="foodSn" />
+        <result column="food_calorie" jdbcType="DECIMAL" property="foodCalorie" />
+        <result column="food_quantity" jdbcType="INTEGER" property="foodQuantity" />
+        <result column="food_category_id" jdbcType="BIGINT" property="foodCategoryId" />
+        <result column="gift_integration" jdbcType="INTEGER" property="giftIntegration" />
+        <result column="gift_growth" jdbcType="INTEGER" property="giftGrowth" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, order_id, order_sn, food_id, food_pic, food_name,food_sn,
+    food_calorie, food_quantity, food_category_id, gift_integration, gift_growth
+    </sql>
+
+</mapper>
